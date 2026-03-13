@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 Scripture Memory Game</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0f1a;--bg2:#1a1a2e;--bg3:#252540;--card:#1e1e35;--card2:#2a2a4a;--pri:#6c5ce7;--pri-lt:#a29bfe;--pri-dk:#5a4bd1;--pri-bg:rgba(108,92,231,.12);--acc:#00cec9;--acc-lt:#55efc4;--acc-bg:rgba(0,206,201,.1);--gold:#fdcb6e;--warn:#e17055;--danger:#d63031;--success:#00b894;--txt:#e8e8f0;--txt2:#b0b0cc;--txt3:#7070a0;--red:#ff6b6b;--yellow:#feca57;--green:#00b894;--gold-m:#f0c27f;--brd:#3a3a5c;--sh:0 4px 20px rgba(0,0,0,.3);--sh-lg:0 8px 40px rgba(0,0,0,.4);--rad:14px;--rad-sm:10px;--rad-xs:6px}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;line-height:1.6}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--pri);border-radius:3px}
+.app-header{background:linear-gradient(135deg,#1a1a2e,#2d2d5e,#16213e);padding:20px;text-align:center;border-bottom:1px solid var(--brd);position:relative;overflow:hidden}
+.app-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(108,92,231,.15),transparent 60%),radial-gradient(circle at 70% 50%,rgba(0,206,201,.1),transparent 60%)}
+.app-header h1{font-size:1.6rem;font-weight:800;position:relative;background:linear-gradient(135deg,var(--pri-lt),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.app-header p{font-size:.82rem;color:var(--txt3);position:relative;margin-top:2px}
+.tab-nav{display:flex;background:var(--bg2);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:100}
+.tab-btn{flex:1;padding:11px 6px;border:none;background:none;color:var(--txt3);cursor:pointer;font-size:.74rem;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.3s;position:relative}
+.tab-btn .ti{font-size:1.1rem}
+.tab-btn:hover{color:var(--pri-lt);background:var(--pri-bg)}
+.tab-btn.active{color:var(--acc)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:3px;background:var(--acc);border-radius:3px 3px 0 0}
+.main{max-width:900px;margin:0 auto;padding:14px 12px 80px}
+.panel{display:none;animation:fadeUp .3s ease}.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--rad);border:1px solid var(--brd);padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.card h2{font-size:1.05rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:.92rem;font-weight:600;margin-bottom:8px;color:var(--txt2)}
+.search-row{display:flex;gap:8px;margin-bottom:10px}
+.search-row input{flex:1;padding:10px 14px;background:var(--bg3);border:2px solid var(--brd);border-radius:var(--rad-sm);color:var(--txt);font-size:.86rem;font-family:inherit}
+.search-row input:focus{outline:none;border-color:var(--pri)}
+.btn{padding:10px 18px;border:none;border-radius:var(--rad-sm);font-size:.82rem;font-weight:600;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:none}
+.btn-pri{background:linear-gradient(135deg,var(--pri),var(--pri-dk));color:#fff;box-shadow:0 4px 15px rgba(108,92,231,.3)}
+.btn-acc{background:linear-gradient(135deg,var(--acc),#00b894);color:#fff;box-shadow:0 4px 15px rgba(0,206,201,.3)}
+.btn-warn{background:var(--warn);color:#fff}.btn-danger{background:var(--danger);color:#fff}
+.btn-ghost{background:var(--bg3);color:var(--txt2);border:1px solid var(--brd)}
+.btn-ghost:hover{border-color:var(--pri);color:var(--pri-lt)}
+.btn-sm{padding:7px 14px;font-size:.76rem}
+.btn-xs{padding:5px 10px;font-size:.7rem}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn .spin{display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* VERSION */
+.ver-section{background:var(--bg3);border-radius:var(--rad-sm);padding:14px;margin-bottom:14px;border:1px solid var(--brd)}
+.ver-section-title{font-size:.78rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ver-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:6px}
+.ver-chip{padding:8px 10px;background:var(--card);border:2px solid var(--brd);border-radius:var(--rad-xs);cursor:pointer;transition:.3s;text-align:center;position:relative}
+.ver-chip:hover{border-color:var(--pri);transform:translateY(-1px)}
+.ver-chip.selected{border-color:var(--acc);background:var(--acc-bg);box-shadow:0 0 12px rgba(0,206,201,.15)}
+.ver-chip .vc-abbr{font-size:.88rem;font-weight:800;color:var(--txt)}
+.ver-chip.selected .vc-abbr{color:var(--acc)}
+.ver-chip .vc-name{font-size:.62rem;color:var(--txt3);line-height:1.2;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ver-chip .vc-api{position:absolute;top:3px;right:5px;font-size:.5rem;padding:1px 4px;border-radius:4px;font-weight:700;background:var(--bg);color:var(--txt3)}
+.ver-chip .vc-api.free{color:var(--success)}
+.ver-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--pri-bg);border:1px solid rgba(108,92,231,.25);border-radius:20px;font-size:.7rem;color:var(--pri-lt);font-weight:700}
+.api-status{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:500}
+.api-status.online{background:rgba(0,184,148,.12);color:var(--success)}
+.api-status.offline{background:rgba(214,48,49,.12);color:var(--danger)}
+.api-status.checking{background:rgba(253,203,110,.12);color:var(--gold)}
+.fallback-box{background:rgba(225,112,85,.08);border:1px solid rgba(225,112,85,.25);border-radius:var(--rad-sm);padding:14px;margin-top:12px;text-align:center}
+.fallback-box p{font-size:.82rem;color:var(--txt2);margin-bottom:8px}
+.fallback-box .fb-link{color:var(--acc);text-decoration:underline;cursor:pointer;font-weight:600}
+.ver-status-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;font-size:.75rem}
+
+.manual-area{margin-top:12px}
+.manual-area textarea{width:100%;padding:12px;background:var(--bg3);border:2px solid var(--brd);border-radius:var(--rad-sm);color:var(--txt);font-size:.86rem;font-family:inherit;min-height:90px;resize:vertical}
+.manual-area textarea:focus{outline:none;border-color:var(--pri)}
+.manual-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.manual-row input{flex:1;min-width:140px;padding:10px;background:var(--bg3);border:2px solid var(--brd);border-radius:var(--rad-sm);color:var(--txt);font-size:.84rem;font-family:inherit}
+.manual-row input:focus{outline:none;border-color:var(--pri)}
+.toggle-link{color:var(--pri-lt);cursor:pointer;font-size:.8rem;display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-weight:500}
+.toggle-link:hover{color:var(--acc)}
+
+.verse-preview{background:var(--bg3);border-radius:var(--rad-sm);padding:14px;margin-top:14px;border-left:4px solid var(--pri);position:relative}
+.verse-preview .vp-ref{font-size:.82rem;color:var(--acc);font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.verse-preview .vp-text{font-size:.92rem;line-height:1.7;font-style:italic}
+.verse-preview .vp-ver{font-size:.7rem;color:var(--txt3);margin-top:6px}
+
+.compare-panel{background:var(--bg3);border-radius:var(--rad-sm);border:1px solid var(--brd);margin-top:14px;overflow:hidden}
+.compare-header{padding:10px 14px;background:var(--card2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;font-weight:600;color:var(--txt2)}
+.compare-header:hover{background:var(--pri-bg)}
+.compare-body{max-height:0;overflow-y:auto;transition:max-height .4s ease}
+.compare-body.open{max-height:600px}
+.compare-item{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.03)}
+.compare-item:last-child{border-bottom:none}
+.compare-item .ci-ver{font-size:.74rem;color:var(--pri-lt);font-weight:700;margin-bottom:3px}
+.compare-item .ci-text{font-size:.84rem;color:var(--txt2);line-height:1.6;font-style:italic}
+.compare-item .ci-err{font-size:.78rem;color:var(--danger);font-style:normal}
+
+.slider-group{margin:14px 0}
+.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:.82rem;font-weight:600}
+.slider-label .sl-val{color:var(--acc);font-size:1rem;font-weight:800}
+input[type="range"]{-webkit-appearance:none;width:100%;height:8px;background:var(--bg3);border-radius:4px;outline:none}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--pri);cursor:pointer;border:3px solid var(--card);box-shadow:0 2px 8px rgba(108,92,231,.4)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-row .tl{font-size:.82rem;color:var(--txt2)}
+.toggle-row .tl small{display:block;font-size:.7rem;color:var(--txt3);font-weight:400}
+.switch{width:44px;height:24px;background:var(--bg3);border-radius:12px;cursor:pointer;position:relative;transition:.3s;border:2px solid var(--brd);flex-shrink:0}
+.switch.on{background:var(--pri);border-color:var(--pri)}
+.switch::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.3s}
+.switch.on::after{left:22px}
+
+.game-ref{font-size:.82rem;color:var(--acc);font-weight:600;margin-bottom:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.game-stats-row{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.game-stat{background:var(--bg3);border-radius:var(--rad-xs);padding:5px 12px;font-size:.76rem;color:var(--txt2);font-weight:500}
+.game-stat span{color:var(--acc);font-weight:700}
+.verse-display{font-size:1.02rem;line-height:2.4;padding:8px;word-wrap:break-word}
+.verse-word{display:inline;margin:0 1px}
+.verse-blank{display:inline-block;min-width:46px;border-bottom:2px solid var(--pri-lt);padding:2px 5px;margin:2px 3px;cursor:pointer;transition:.2s;background:var(--pri-bg);border-radius:4px 4px 0 0;vertical-align:bottom;text-align:center;font-weight:600;color:var(--pri-lt);position:relative;line-height:1.4}
+.verse-blank:hover{border-color:var(--acc);background:var(--acc-bg)}
+.verse-blank.filled{color:var(--acc);border-color:var(--acc)}
+.verse-blank.correct{color:var(--success);border-color:var(--success);background:rgba(0,184,148,.1)}
+.verse-blank.wrong{color:var(--danger);border-color:var(--danger);background:rgba(214,48,49,.1);animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.verse-blank .hint-letter{color:var(--txt3);font-weight:400;font-size:.8em}
+.verse-blank .word-correction{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--danger);color:#fff;padding:3px 8px;border-radius:4px;font-size:.7rem;white-space:nowrap;z-index:5;pointer-events:none}
+.verse-blank .word-correction::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--danger)}
+.word-bank{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0;padding:12px;background:var(--bg3);border-radius:var(--rad-sm);border:1px dashed var(--brd)}
+.wb-word{padding:6px 12px;background:var(--card2);border:1px solid var(--brd);border-radius:20px;font-size:.82rem;cursor:pointer;transition:.2s;color:var(--txt);font-weight:500;user-select:none}
+.wb-word:hover{border-color:var(--pri);color:var(--pri-lt);transform:scale(1.05)}
+.wb-word.used{opacity:.25;pointer-events:none;text-decoration:line-through}
+.wb-word.wb-correct{background:rgba(0,184,148,.15);border-color:var(--success);color:var(--success)}
+
+.flashcard-container{perspective:1000px;margin:16px auto;max-width:480px}
+.flashcard{width:100%;min-height:230px;position:relative;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.flashcard.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--rad);padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--brd)}
+.fc-front{background:linear-gradient(135deg,var(--card),var(--card2));z-index:2}
+.fc-back{background:linear-gradient(135deg,#1a2a3a,#1e3a2e);transform:rotateY(180deg)}
+.fc-label{font-size:.72rem;color:var(--txt3);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;font-weight:700}
+.fc-text{font-size:1.05rem;line-height:1.7;font-style:italic;color:var(--txt)}
+.fc-ref{margin-top:12px;font-size:.82rem;color:var(--acc);font-weight:600}
+.fc-hint{font-size:.75rem;color:var(--txt3);margin-top:8px}
+.progress-bar{width:100%;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;border-radius:5px;transition:width .5s ease;background:linear-gradient(90deg,var(--pri),var(--acc))}
+.progress-label{display:flex;justify-content:space-between;font-size:.76rem;color:var(--txt3)}
+
+.mastery-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.mastery-dot.m-red{background:var(--red)}.mastery-dot.m-yellow{background:var(--yellow)}.mastery-dot.m-green{background:var(--green)}.mastery-dot.m-gold{background:var(--gold-m)}
+.saved-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border-radius:var(--rad-sm);margin-bottom:7px;cursor:pointer;transition:.3s;border-left:4px solid var(--brd);position:relative}
+.saved-item:hover{background:var(--card2);transform:translateX(4px)}
+.saved-item.si-red{border-left-color:var(--red)}.saved-item.si-yellow{border-left-color:var(--yellow)}.saved-item.si-green{border-left-color:var(--green)}.saved-item.si-gold{border-left-color:var(--gold-m)}
+.saved-item .si-info{flex:1;min-width:0}
+.saved-item .si-ref{font-weight:700;font-size:.88rem;color:var(--txt);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.saved-item .si-pct{font-size:.84rem;font-weight:700;min-width:42px;text-align:right}
+.saved-item .si-meta{font-size:.7rem;color:var(--txt3);margin-top:2px}
+.si-badge{font-size:.62rem;padding:2px 7px;border-radius:10px;font-weight:700}
+.si-badge.review{background:rgba(225,112,85,.15);color:var(--warn)}
+.si-badge.ver-badge{background:var(--pri-bg);color:var(--pri-lt)}
+.saved-item .si-del{background:none;border:none;cursor:pointer;font-size:.85rem;padding:4px;opacity:.4;transition:.2s;color:var(--txt)}
+.saved-item .si-del:hover{opacity:1}
+.chunk-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.chunk-tab{padding:5px 11px;background:var(--bg3);border:1px solid var(--brd);border-radius:var(--rad-xs);font-size:.74rem;cursor:pointer;color:var(--txt3);font-weight:500;transition:.2s}
+.chunk-tab:hover{border-color:var(--pri);color:var(--pri-lt)}
+.chunk-tab.active{background:var(--pri);border-color:var(--pri);color:#fff}
+.result-box{text-align:center;padding:22px;border-radius:var(--rad);margin-top:14px}
+.result-box.perfect{background:linear-gradient(135deg,rgba(0,184,148,.1),rgba(108,92,231,.1));border:2px solid var(--success)}
+.result-box.good{background:rgba(254,202,87,.08);border:2px solid var(--yellow)}
+.result-box.poor{background:rgba(214,48,49,.08);border:2px solid var(--danger)}
+.result-score{font-size:2.2rem;font-weight:900;margin-bottom:4px}
+.result-msg{font-size:.95rem;font-weight:600;margin-bottom:10px}
+.toast-container{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{padding:11px 16px;border-radius:var(--rad-sm);color:#fff;font-size:.82rem;font-weight:500;box-shadow:var(--sh-lg);animation:toastIn .4s ease,toastOut .4s ease 2.6s forwards;pointer-events:auto;max-width:320px}
+.toast.success{background:var(--success)}.toast.error{background:var(--danger)}.toast.info{background:var(--pri)}
+@keyframes toastIn{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(50px)}}
+.empty-msg{text-align:center;padding:36px 20px;color:var(--txt3)}.empty-msg .em-icon{font-size:2.5rem;margin-bottom:10px;display:block}.empty-msg p{font-size:.86rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{padding:4px 10px;border-radius:12px;font-size:.7rem;font-weight:600;background:var(--bg3);color:var(--txt3);display:flex;align-items:center;gap:4px}
+@media(max-width:600px){.search-row{flex-direction:column}.manual-row{flex-direction:column}.main{padding:10px 8px 80px}.card{padding:14px}.verse-display{font-size:.92rem;line-height:2.2}.verse-blank{min-width:38px;padding:2px 3px;font-size:.82rem}.wb-word{padding:5px 9px;font-size:.78rem}.tab-btn{font-size:.68rem;padding:9px 3px}.ver-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}.fc-face{padding:18px}}
+</style>
+</head>
+<body>
+<header class="app-header">
+<h1>📖 Scripture Memory Game</h1>
+<p>Commit God's Word to heart through interactive recall</p>
+</header>
+<nav class="tab-nav">
+<button class="tab-btn active" onclick="switchTab('search')" data-tab="search"><span class="ti">🔍</span>Find</button>
+<button class="tab-btn" onclick="switchTab('practice')" data-tab="practice"><span class="ti">🎮</span>Practice</button>
+<button class="tab-btn" onclick="switchTab('flashcards')" data-tab="flashcards"><span class="ti">🃏</span>Cards</button>
+<button class="tab-btn" onclick="switchTab('library')" data-tab="library"><span class="ti">📚</span>Library</button>
+</nav>
+<main class="main">
+<!-- SEARCH -->
+<div class="panel active" id="tab-search">
+<div class="card">
+<h2>📚 Choose Bible Version</h2>
+<div class="ver-section">
+<div class="ver-section-title">⭐ Modern Translations</div>
+<div class="ver-grid" id="verModern"></div>
+</div>
+<div class="ver-section">
+<div class="ver-section-title">📜 Classic / Public Domain</div>
+<div class="ver-grid" id="verClassic"></div>
+</div>
+<div class="ver-section">
+<div class="ver-section-title">🌍 Study & Other</div>
+<div class="ver-grid" id="verOther"></div>
+</div>
+<div class="ver-status-row">
+<span class="ver-badge" id="currentVBadge">📖 NIV</span>
+<span class="api-status checking" id="apiStatus">⏳ Ready</span>
+</div>
+</div>
+<div class="card">
+<h2>🔍 Find a Verse</h2>
+<div class="search-row">
+<input type="text" id="searchInput" placeholder="e.g. John 3:16, Psalm 23:1-6, Romans 8:28" onkeydown="if(event.key==='Enter')fetchVerse()">
+<button class="btn btn-pri" onclick="fetchVerse()" id="fetchBtn">📥 Fetch</button>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-ghost btn-sm" onclick="compareVersions()" id="compareBtn">🔄 Compare Versions</button>
+<button class="btn btn-ghost btn-sm" onclick="openBibleGateway()">🌐 BibleGateway</button>
+</div>
+<span class="toggle-link" onclick="toggleManual()">🔧 Manual Override — paste custom text / translation</span>
+<div class="manual-area" id="manualArea" style="display:none">
+<div class="manual-row">
+<input type="text" id="manualRef" placeholder="Reference (e.g. Philippians 4:13)">
+<input type="text" id="manualVer" placeholder="Version (e.g. NIV, ESV)">
+</div>
+<textarea id="manualText" placeholder="Paste verse text here in any translation..." style="margin-top:8px"></textarea>
+<button class="btn btn-acc btn-sm" onclick="loadManual()" style="margin-top:8px">✅ Load Verse</button>
+</div>
+<div id="fallbackBox" class="fallback-box" style="display:none">
+<p>⚠️ Couldn't auto-fetch this version. You can:</p>
+<p><span class="fb-link" onclick="openBibleGateway()">📖 Open BibleGateway.com</span> → Copy the text → Paste below</p>
+<p style="font-size:.75rem;color:var(--txt3);margin-top:4px">Or try a Public Domain version (KJV, WEB, ASV) which always works.</p>
+</div>
+<div id="comparePanel" class="compare-panel" style="display:none">
+<div class="compare-header" onclick="toggleCompare()">📊 Version Comparison <span id="compareIcon">▼</span></div>
+<div class="compare-body" id="compareBody"></div>
+</div>
+<div id="versePreview" style="display:none"></div>
+</div>
+<div id="verseSettings" style="display:none">
+<div class="card">
+<h2>⚙️ Practice Settings</h2>
+<div class="slider-group">
+<div class="slider-label"><span>Difficulty — Words Removed</span><span class="sl-val" id="diffLabel">30%</span></div>
+<input type="range" id="diffSlider" min="10" max="90" value="30" step="5" oninput="updateDiffLabel()">
+</div>
+<div class="toggle-row"><div class="tl"><strong>🔠 First-Letter Hints</strong><small>Show first letter of hidden words</small></div><div class="switch" id="hintToggle" onclick="toggleSwitch(this)"></div></div>
+<div class="toggle-row"><div class="tl"><strong>🏆 Mastery Mode</strong><small>Auto-increase difficulty on perfect score</small></div><div class="switch on" id="masteryToggle" onclick="toggleSwitch(this)"></div></div>
+<div class="toggle-row"><div class="tl"><strong>📦 Word Bank</strong><small>Tappable word bank for mobile</small></div><div class="switch on" id="bankToggle" onclick="toggleSwitch(this)"></div></div>
+<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-pri" onclick="startFillBlanks()">🎮 Fill-in-the-Blanks</button>
+<button class="btn btn-acc" onclick="startFlashcard()">🃏 Flashcards</button>
+<button class="btn btn-ghost btn-sm" onclick="chunkVerse()">✂️ Chunk Lines</button>
+</div>
+<div id="chunkArea" style="display:none;margin-top:12px">
+<h3>📄 Select Chunk</h3>
+<div id="chunkTabs" class="chunk-tabs"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- PRACTICE -->
+<div class="panel" id="tab-practice">
+<div id="practiceEmpty" class="empty-msg"><span class="em-icon">🎮</span><p>Select a verse to start practicing!</p></div>
+<div id="practiceArea" style="display:none">
+<div class="card">
+<div class="game-ref" id="gameRef"></div>
+<div class="game-stats-row"><div class="game-stat">Blanks: <span id="gsTotal">0</span></div><div class="game-stat">Filled: <span id="gsFilled">0</span></div><div class="game-stat">Difficulty: <span id="gsDiff">30%</span></div></div>
+<div class="progress-bar"><div class="progress-fill" id="gameProg" style="width:0%"></div></div>
+<div id="verseDisplay" class="verse-display"></div>
+<div id="wordBank" class="word-bank" style="display:none"></div>
+<div id="gameResult" style="display:none"></div>
+<div style="display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap">
+<button class="btn btn-pri btn-sm" onclick="checkAnswers()" id="checkBtn">✅ Check</button>
+<button class="btn btn-ghost btn-sm" onclick="revealAll()">👁 Reveal</button>
+<button class="btn btn-ghost btn-sm" onclick="resetGame()">🔄 Reset</button>
+</div>
+</div>
+<div class="card"><h3>📊 Word Mastery</h3><div id="wordMasteryList"></div><button class="btn btn-ghost btn-xs" onclick="resetWordMastery()" style="margin-top:8px">🔄 Reset Mastery</button></div>
+</div>
+</div>
+<!-- FLASHCARDS -->
+<div class="panel" id="tab-flashcards">
+<div id="fcEmpty" class="empty-msg"><span class="em-icon">🃏</span><p>Load a verse to use flashcards!</p></div>
+<div id="fcArea" style="display:none">
+<div class="card">
+<div class="game-ref" id="fcRef"></div>
+<div class="flashcard-container" onclick="flipCard()">
+<div class="flashcard" id="flashcard">
+<div class="fc-face fc-front"><div class="fc-label">What comes next?</div><div class="fc-text" id="fcPrompt"></div><div class="fc-hint">Tap to reveal</div></div>
+<div class="fc-face fc-back"><div class="fc-label">Answer</div><div class="fc-text" id="fcAnswer"></div><div class="fc-ref" id="fcRefBack"></div></div>
+</div>
+</div>
+<div style="display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+<button class="btn btn-danger btn-sm" onclick="fcRate(0)">❌ Forgot</button>
+<button class="btn btn-sm" onclick="fcRate(1)" style="background:var(--yellow);color:#000">🤔 Hard</button>
+<button class="btn btn-acc btn-sm" onclick="fcRate(2)">✅ Got It</button>
+</div>
+<div class="progress-bar" style="margin-top:12px"><div class="progress-fill" id="fcProg" style="width:0%"></div></div>
+<div class="progress-label"><span id="fcProgLabel">Card 1</span><span id="fcScore">0%</span></div>
+</div>
+</div>
+</div>
+<!-- LIBRARY -->
+<div class="panel" id="tab-library">
+<div class="card"><h2>📚 Saved Verses</h2>
+<div class="chips"><div class="chip"><span class="mastery-dot m-red"></span>0-25%</div><div class="chip"><span class="mastery-dot m-yellow"></span>26-60%</div><div class="chip"><span class="mastery-dot m-green"></span>61-89%</div><div class="chip"><span class="mastery-dot m-gold"></span>90%+</div></div>
+<div id="libraryList"></div><div id="libraryEmpty" class="empty-msg" style="display:none"><span class="em-icon">📚</span><p>No saved verses yet</p></div></div>
+<div class="card" id="reviewCard" style="display:none"><h2>🔁 Needs Review</h2><p style="font-size:.8rem;color:var(--txt3);margin-bottom:10px">Mastered verses due for spaced repetition</p><div id="reviewList"></div></div>
+</div>
+</main>
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+const SK='smg_data2';
+const STOP=new Set('the a an and or but in on at to for of is it was be are am been being have has had do does did will would shall should may might can could not no so if by with from as than that this these those he she they them his her its their we our you your my me us him i up out all into who what when where which how there here then also just very too yet nor both each any some own such other per o ye thee thy thou hath unto upon doth saith wherefore thereof'.split(' '));
+
+// ======= VERSIONS =======
+const VERSIONS={
+niv:{n:'New International Version',a:'NIV',g:'modern',api:'bolls',c:'NIV',yr:2011},
+nlt:{n:'New Living Translation',a:'NLT',g:'modern',api:'bolls',c:'NLT',yr:2015},
+esv:{n:'English Standard Version',a:'ESV',g:'modern',api:'bolls',c:'ESV',yr:2016},
+nasb:{n:'New American Standard',a:'NASB',g:'modern',api:'bolls',c:'NASB20',yr:2020},
+nkjv:{n:'New King James Version',a:'NKJV',g:'modern',api:'bolls',c:'NKJV',yr:1982},
+csb:{n:'Christian Standard Bible',a:'CSB',g:'modern',api:'bolls',c:'CSB',yr:2017},
+amp:{n:'Amplified Bible',a:'AMP',g:'modern',api:'bolls',c:'AMP',yr:2015},
+msg:{n:'The Message',a:'MSG',g:'modern',api:'bolls',c:'MSG',yr:2002},
+ncv:{n:'New Century Version',a:'NCV',g:'modern',api:'bolls',c:'NCV',yr:2005},
+cev:{n:'Contemporary English',a:'CEV',g:'modern',api:'bolls',c:'CEV',yr:1995},
+gnt:{n:'Good News Translation',a:'GNT',g:'modern',api:'bolls',c:'GNBDC',yr:1992},
+kjv:{n:'King James Version',a:'KJV',g:'classic',api:'bapi',c:'kjv',yr:1611},
+web:{n:'World English Bible',a:'WEB',g:'classic',api:'bapi',c:'web',yr:2000},
+asv:{n:'American Standard Version',a:'ASV',g:'classic',api:'bapi',c:'asv',yr:1901},
+bbe:{n:'Bible in Basic English',a:'BBE',g:'classic',api:'bapi',c:'bbe',yr:1965},
+ylt:{n:"Young's Literal Translation",a:'YLT',g:'classic',api:'bapi',c:'ylt',yr:1862},
+darby:{n:'Darby Translation',a:'DARBY',g:'classic',api:'bapi',c:'darby',yr:1890},
+net:{n:'New English Translation',a:'NET',g:'other',api:'bibleorg',c:'net',yr:2019},
+oeb:{n:'Open English Bible',a:'OEB',g:'other',api:'bapi',c:'oeb-us',yr:2020},
+weymouth:{n:'Weymouth New Testament',a:'Weymouth',g:'other',api:'bapi',c:'weymouth',yr:1903},
+};
+
+// ======= BOOK MAPPING =======
+const BKS=(()=>{const m={};const books=[
+['genesis','gen','ge','gn'],['exodus','exod','exo','ex'],['leviticus','lev','le','lv'],['numbers','num','nu','nm','nb'],
+['deuteronomy','deut','deu','dt'],['joshua','josh','jos'],['judges','judg','jdg','jg'],['ruth','rth','ru'],
+['1 samuel','1samuel','1sam','1sa','1sm','i samuel','i sam'],['2 samuel','2samuel','2sam','2sa','2sm','ii samuel','ii sam'],
+['1 kings','1kings','1kgs','1ki','i kings','i kgs'],['2 kings','2kings','2kgs','2ki','ii kings','ii kgs'],
+['1 chronicles','1chronicles','1chr','1ch','i chronicles','i chr'],['2 chronicles','2chronicles','2chr','2ch','ii chronicles','ii chr'],
+['ezra','ezr'],['nehemiah','neh','ne'],['esther','esth','est','es'],['job','jb'],
+['psalms','psalm','psa','ps','pss'],['proverbs','prov','pro','prv','pr'],
+['ecclesiastes','eccl','ecc','eccles','ec','qoh'],['song of solomon','song of songs','song','sos','sng','canticles','cant'],
+['isaiah','isa','is'],['jeremiah','jer','je','jr'],['lamentations','lam','la'],
+['ezekiel','ezek','eze','ezk'],['daniel','dan','da','dn'],['hosea','hos','ho'],
+['joel','joe','jl'],['amos','amo','am'],['obadiah','obad','ob'],['jonah','jon','jnh'],
+['micah','mic','mc'],['nahum','nah','na'],['habakkuk','hab','hb'],['zephaniah','zeph','zep','zp'],
+['haggai','hag','hg'],['zechariah','zech','zec','zc'],['malachi','mal','ml'],
+['matthew','matt','mat','mt'],['mark','mrk','mk','mar'],['luke','luk','lk','lu'],['john','jhn','jn','joh'],
+['acts','act','ac'],['romans','rom','ro','rm'],
+['1 corinthians','1corinthians','1cor','1co','i corinthians','i cor'],['2 corinthians','2corinthians','2cor','2co','ii corinthians','ii cor'],
+['galatians','gal','ga'],['ephesians','eph','ep','ephes'],['philippians','phil','php','pp','philipp'],
+['colossians','col','co'],['1 thessalonians','1thessalonians','1thess','1th','1thes','i thessalonians','i thess'],
+['2 thessalonians','2thessalonians','2thess','2th','2thes','ii thessalonians','ii thess'],
+['1 timothy','1timothy','1tim','1ti','i timothy','i tim'],['2 timothy','2timothy','2tim','2ti','ii timothy','ii tim'],
+['titus','tit','ti'],['philemon','phlm','phm','philem'],['hebrews','heb','he'],
+['james','jas','jm','jam'],['1 peter','1peter','1pet','1pe','1pt','i peter','i pet'],
+['2 peter','2peter','2pet','2pe','2pt','ii peter','ii pet'],
+['1 john','1john','1jn','1jhn','1jo','i john','i jn'],['2 john','2john','2jn','2jhn','2jo','ii john','ii jn'],
+['3 john','3john','3jn','3jhn','3jo','iii john','iii jn'],
+['jude','jud','jd'],['revelation','rev','re','rv','apocalypse']
+];
+books.forEach((aliases,i)=>aliases.forEach(a=>m[a.toLowerCase()]=i+1));return m})();
+
+const BK_NAMES=['','Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+
+// BibleGateway version codes
+const BG_CODES={niv:'NIV',nlt:'NLT',esv:'ESV',nasb:'NASB',nkjv:'NKJV',csb:'CSB',amp:'AMP',msg:'MSG',ncv:'NCV',cev:'CEV',gnt:'GNT',kjv:'KJV',web:'WEB',asv:'ASV',ylt:'YLT',net:'NET'};
+
+let st={verses:[],current:null,chunkIndex:-1,gameWords:[],blankIdx:[],selBlank:-1,fcCards:[],fcI:0,fcOk:0};
+let selectedVersion='niv';
+
+function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d?.verses)st.verses=d.verses}catch(e){}}
+function save(){localStorage.setItem(SK,JSON.stringify({verses:st.verses}))}
+function toast(m,t='info'){const c=document.getElementById('toastContainer'),el=document.createElement('div');el.className='toast '+t;el.textContent=m;c.appendChild(el);setTimeout(()=>el.remove(),3200)}
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function switchTab(t){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelector(`[data-tab="${t}"]`).classList.add('active');if(t==='library')renderLibrary()}
+function toggleManual(){const a=document.getElementById('manualArea');a.style.display=a.style.display==='none'?'block':'none'}
+function toggleSwitch(el){el.classList.toggle('on')}
+function isOn(id){return document.getElementById(id).classList.contains('on')}
+function updateDiffLabel(){document.getElementById('diffLabel').textContent=document.getElementById('diffSlider').value+'%'}
+
+// ======= VERSION SELECTOR =======
+function renderVersionGrid(){
+  const groups={modern:document.getElementById('verModern'),classic:document.getElementById('verClassic'),other:document.getElementById('verOther')};
+  for(const[k,v]of Object.entries(VERSIONS)){
+    const el=document.createElement('div');
+    el.className='ver-chip'+(k===selectedVersion?' selected':'');
+    el.dataset.ver=k;
+    const apiLabel=v.api==='bapi'?'FREE':'API';
+    const apiClass=v.api==='bapi'?'free':'';
+    el.innerHTML=`<div class="vc-abbr">${v.a}</div><div class="vc-name">${v.n}</div><div class="vc-api ${apiClass}">${apiLabel}</div>`;
+    el.onclick=()=>selectVersion(k);
+    groups[v.g].appendChild(el);
+  }
+}
+function selectVersion(k){
+  selectedVersion=k;
+  document.querySelectorAll('.ver-chip').forEach(c=>{c.classList.toggle('selected',c.dataset.ver===k)});
+  const v=VERSIONS[k];
+  document.getElementById('currentVBadge').textContent='📖 '+v.a;
+  const st=document.getElementById('apiStatus');
+  st.className='api-status '+(v.api==='bapi'?'online':'checking');
+  st.textContent=v.api==='bapi'?'✅ Free API — always available':'🔄 Will attempt fetch...';
+  document.getElementById('fallbackBox').style.display='none';
+}
+
+// ======= REFERENCE PARSER =======
+function parseRef(input){
+  input=input.trim();
+  // Match: [optional number] bookname chapter[:verseStart[-verseEnd]]
+  const m=input.match(/^(\d?\s*[a-zA-Z][a-zA-Z\s]*?)\s+(\d+)(?::(\d+)(?:\s*[-–—]\s*(\d+))?)?$/i);
+  if(!m)return null;
+  const bookRaw=m[1].trim().toLowerCase();
+  const chapter=parseInt(m[2]);
+  const vs=m[3]?parseInt(m[3]):null;
+  const ve=m[4]?parseInt(m[4]):vs;
+  const bookNum=BKS[bookRaw];
+  if(!bookNum)return null;
+  return{book:bookNum,bookName:BK_NAMES[bookNum],chapter,vs,ve,
+    display:`${BK_NAMES[bookNum]} ${chapter}${vs?':'+vs+(ve&&ve!==vs?'-'+ve:''):''}`};
+}
+
+// ======= MULTI-API FETCH =======
+async function fetchFromBapi(refStr,code){
+  const r=await fetch(`https://bible-api.com/${encodeURIComponent(refStr)}?translation=${code}`,{signal:AbortSignal.timeout(8000)});
+  if(!r.ok)throw new Error('not found');
+  const d=await r.json();
+  if(!d?.text)throw new Error('empty');
+  return{text:d.text.trim().replace(/\n/g,' ').replace(/\s+/g,' '),ref:d.reference};
+}
+
+async function fetchFromBolls(parsed,code){
+  const url=`https://bolls.life/get-chapter/${code}/${parsed.book}/${parsed.chapter}/`;
+  const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
+  if(!r.ok)throw new Error('not found');
+  const data=await r.json();
+  if(!data?.length)throw new Error('empty');
+  let verses=data;
+  if(parsed.vs!==null)verses=data.filter(v=>v.verse>=parsed.vs&&v.verse<=(parsed.ve||parsed.vs));
+  if(!verses.length)throw new Error('verses not found');
+  const text=verses.map(v=>(v.text||'').replace(/<[^>]*>/g,'')).join(' ').replace(/\s+/g,' ').trim();
+  return{text,ref:parsed.display};
+}
+
+async function fetchFromBibleOrg(refStr){
+  const r=await fetch(`https://labs.bible.org/api/?passage=${encodeURIComponent(refStr)}&type=json`,{signal:AbortSignal.timeout(8000)});
+  if(!r.ok)throw new Error('not found');
+  const d=await r.json();
+  if(!d?.length)throw new Error('empty');
+  const text=d.map(v=>v.text).join(' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+  const ref=d[0].bookname+' '+d[0].chapter+':'+d[0].verse+(d.length>1?'-'+d[d.length-1].verse:'');
+  return{text,ref};
+}
+
+async function apiFetch(refStr,verKey){
+  const v=VERSIONS[verKey];
+  const parsed=parseRef(refStr);
+
+  if(v.api==='bapi'){
+    return await fetchFromBapi(refStr,v.c);
+  }
+  if(v.api==='bolls'){
+    if(!parsed)throw new Error('Could not parse reference. Use format: Book Chapter:Verse');
+    return await fetchFromBolls(parsed,v.c);
+  }
+  if(v.api==='bibleorg'){
+    return await fetchFromBibleOrg(refStr);
+  }
+  throw new Error('Unknown API');
+}
+
+// ======= MAIN FETCH =======
+async function fetchVerse(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q){toast('Enter a scripture reference','error');return}
+  const btn=document.getElementById('fetchBtn');
+  btn.disabled=true;btn.innerHTML='<span class="spin">⏳</span>';
+  document.getElementById('fallbackBox').style.display='none';
+  const vk=selectedVersion;const vi=VERSIONS[vk];
+  try{
+    const result=await apiFetch(q,vk);
+    loadVerse(result.ref,result.text,vi.a);
+    const st=document.getElementById('apiStatus');
+    st.className='api-status online';st.textContent='✅ Fetched successfully';
+    toast(`✅ Loaded from ${vi.a}!`,'success');
+  }catch(e){
+    console.warn('Primary fetch failed:',e.message);
+    // Fallback: try bible-api.com with KJV
+    try{
+      const fb=await fetchFromBapi(q,'kjv');
+      loadVerse(fb.ref,fb.text,'KJV');
+      toast(`⚠️ ${vi.a} unavailable — loaded KJV as fallback`,'info');
+      document.getElementById('fallbackBox').style.display='block';
+      document.getElementById('apiStatus').className='api-status offline';
+      document.getElementById('apiStatus').textContent=`❌ ${vi.a} failed — showing KJV`;
+    }catch(e2){
+      toast('Could not fetch. Use Manual Override or try another version.','error');
+      document.getElementById('fallbackBox').style.display='block';
+      document.getElementById('apiStatus').className='api-status offline';
+      document.getElementById('apiStatus').textContent='❌ Fetch failed';
+    }
+  }finally{btn.disabled=false;btn.innerHTML='📥 Fetch'}
+}
+
+// ======= COMPARE VERSIONS =======
+async function compareVersions(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q){toast('Enter a reference first','error');return}
+  const panel=document.getElementById('comparePanel');panel.style.display='block';
+  const body=document.getElementById('compareBody');
+  body.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3)"><span class="spin" style="display:inline-block">⏳</span> Fetching versions...</div>';
+  body.classList.add('open');
+  // Try key versions
+  const tryVersions=['niv','nlt','esv','kjv','nasb','nkjv','csb','web','net','msg'];
+  const results=[];
+  const promises=tryVersions.map(async vk=>{
+    const vi=VERSIONS[vk];if(!vi)return;
+    try{
+      const r=await apiFetch(q,vk);
+      results.push({key:vk,abbr:vi.a,name:vi.n,text:r.text,ref:r.ref});
+    }catch(e){
+      results.push({key:vk,abbr:vi.a,name:vi.n,text:null,error:e.message});
+    }
+  });
+  await Promise.allSettled(promises);
+  results.sort((a,b)=>tryVersions.indexOf(a.key)-tryVersions.indexOf(b.key));
+  body.innerHTML=results.map(r=>`<div class="compare-item">
+    <div class="ci-ver">${r.abbr} — ${r.name}</div>
+    ${r.text?`<div class="ci-text">"${esc(r.text)}"</div><div style="margin-top:6px"><button class="btn btn-ghost btn-xs" onclick="loadVerse('${esc(r.ref).replace(/'/g,"\\'")}','${esc(r.text).replace(/'/g,"\\'")}','${r.abbr}');toast('Loaded ${r.abbr}','success')">📥 Use</button></div>`
+    :`<div class="ci-err">⚠️ Not available</div>`}
+  </div>`).join('');
+}
+function toggleCompare(){const b=document.getElementById('compareBody'),ic=document.getElementById('compareIcon');b.classList.toggle('open');ic.textContent=b.classList.contains('open')?'▲':'▼'}
+
+function openBibleGateway(){
+  const q=document.getElementById('searchInput').value.trim()||'John 3:16';
+  const bgCode=BG_CODES[selectedVersion]||VERSIONS[selectedVersion]?.a||'NIV';
+  window.open(`https://www.biblegateway.com/passage/?search=${encodeURIComponent(q)}&version=${bgCode}`,'_blank');
+}
+
+function loadManual(){
+  const ref=document.getElementById('manualRef').value.trim()||'Custom Verse';
+  const text=document.getElementById('manualText').value.trim();
+  const ver=document.getElementById('manualVer').value.trim()||VERSIONS[selectedVersion]?.a||'Custom';
+  if(!text){toast('Please paste verse text','error');return}
+  loadVerse(ref,text,ver);toast('Verse loaded!','success');
+}
+
+function loadVerse(ref,text,version){
+  text=text.replace(/\s+/g,' ').trim();
+  st.current={ref,fullText:text,version:version||'KJV',chunks:null};st.chunkIndex=-1;
+  const uid=ref+'|'+version;
+  let ex=st.verses.find(v=>v.uid===uid);
+  if(!ex){ex={uid,ref,fullText:text,version,wordMastery:{},overallPct:0,lastPracticed:null,practiceCount:0,perfectCount:0,createdAt:new Date().toISOString()};st.verses.push(ex);save()}
+  else{ex.fullText=text;ex.version=version;save()}
+  document.getElementById('versePreview').style.display='block';
+  document.getElementById('versePreview').innerHTML=`<div class="verse-preview"><div class="vp-ref">📖 ${esc(ref)} <span class="ver-badge">${esc(version)}</span></div><div class="vp-text">"${esc(text)}"</div><div class="vp-ver">${esc(version)} Translation</div></div>`;
+  document.getElementById('verseSettings').style.display='block';
+  document.getElementById('chunkArea').style.display='none';
+  document.getElementById('fallbackBox').style.display='none';
+}
+
+function chunkVerse(){
+  if(!st.current){toast('Load a verse first','error');return}
+  const t=st.current.fullText;
+  const ss=t.split(/(?<=[.;:!?])\s+|(?<=,)\s+(?=[A-Z])/);
+  if(ss.length<=1){const w=t.split(/\s+/);const m=Math.ceil(w.length/2);st.current.chunks=[w.slice(0,m).join(' '),w.slice(m).join(' ')].filter(s=>s.trim())}
+  else st.current.chunks=ss.filter(s=>s.trim());
+  document.getElementById('chunkArea').style.display='block';
+  document.getElementById('chunkTabs').innerHTML='<div class="chunk-tab active" onclick="selChunk(-1,this)">Full</div>'+st.current.chunks.map((_,i)=>`<div class="chunk-tab" onclick="selChunk(${i},this)">Line ${i+1}</div>`).join('');
+  st.chunkIndex=-1;
+}
+function selChunk(i,el){document.querySelectorAll('.chunk-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');st.chunkIndex=i}
+function activeText(){if(!st.current)return'';if(st.chunkIndex>=0&&st.current.chunks)return st.current.chunks[st.chunkIndex];return st.current.fullText}
+
+function buildWords(text){
+  return text.split(/\s+/).filter(w=>w.length>0).map((raw,i)=>{
+    const clean=raw.replace(/^[^a-zA-Z'']+|[^a-zA-Z'']+$/g,'');
+    const prefix=raw.match(/^([^a-zA-Z'']*)/)?.[1]||'';
+    const suffix=raw.match(/([^a-zA-Z'']*)$/)?.[1]||'';
+    return{raw,clean,prefix,suffix,isStop:STOP.has(clean.toLowerCase()),importance:STOP.has(clean.toLowerCase())?0:clean.length,index:i};
+  });
+}
+function pickBlanks(words,pct,vd){
+  const rem=words.filter(w=>w.clean.length>0);
+  const cnt=Math.max(1,Math.round(rem.length*(pct/100)));
+  const wm=vd?.wordMastery||{};
+  const sc=rem.map(w=>{const k=w.clean.toLowerCase();const ms=wm[k]?.correct||0;
+    let s=w.importance*3;if(w.isStop)s-=20;s-=ms*5;if(ms>=3)s-=30;s+=Math.random()*5;return{...w,score:s}});
+  sc.sort((a,b)=>b.score-a.score);
+  return sc.slice(0,cnt).map(w=>w.index).sort((a,b)=>a-b);
+}
+
+function startFillBlanks(){
+  if(!st.current){toast('Load a verse first','error');return}
+  const text=activeText();const pct=parseInt(document.getElementById('diffSlider').value);
+  const uid=st.current.ref+'|'+st.current.version;
+  const vd=st.verses.find(v=>v.uid===uid);
+  st.gameWords=buildWords(text);st.blankIdx=pickBlanks(st.gameWords,pct,vd);st.selBlank=-1;
+  renderGame(pct);switchTab('practice');
+  document.getElementById('practiceEmpty').style.display='none';
+  document.getElementById('practiceArea').style.display='block';
+}
+
+function renderGame(pct){
+  document.getElementById('gameRef').innerHTML='📖 '+esc(st.current.ref)+' <span class="ver-badge">'+esc(st.current.version)+'</span>';
+  document.getElementById('gsTotal').textContent=st.blankIdx.length;
+  document.getElementById('gsFilled').textContent='0';
+  document.getElementById('gsDiff').textContent=(pct||document.getElementById('diffSlider').value)+'%';
+  document.getElementById('gameProg').style.width='0%';
+  document.getElementById('gameResult').style.display='none';
+  document.getElementById('checkBtn').disabled=false;
+  const hints=isOn('hintToggle'),bank=isOn('bankToggle');
+  document.getElementById('verseDisplay').innerHTML=st.gameWords.map((w,i)=>{
+    if(st.blankIdx.includes(i)){
+      const h=hints&&w.clean.length?`<span class="hint-letter">${w.clean[0]}</span>`:'';
+      return`${w.prefix}<span class="verse-blank" data-idx="${i}" onclick="selBlank(${i})" data-answer="${esc(w.clean)}">${h}</span>${w.suffix}`;
+    }
+    return`<span class="verse-word">${esc(w.raw)}</span>`;
+  }).join(' ');
+  const wb=document.getElementById('wordBank');
+  if(bank){
+    const bw=st.blankIdx.map(i=>st.gameWords[i].clean).filter(w=>w.length);
+    for(let i=bw.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bw[i],bw[j]]=[bw[j],bw[i]]}
+    wb.style.display='flex';wb.innerHTML=bw.map(w=>`<span class="wb-word" data-word="${esc(w)}" onclick="bankClick(this)">${esc(w)}</span>`).join('');
+  }else wb.style.display='none';
+  renderMastery();
+}
+
+function selBlank(idx){
+  st.selBlank=idx;
+  document.querySelectorAll('.verse-blank').forEach(b=>b.style.boxShadow=parseInt(b.dataset.idx)===idx?'0 0 0 2px var(--acc)':'');
+  if(!isOn('bankToggle')){
+    const w=st.gameWords[idx];
+    const a=prompt(`Fill blank (${w.clean.length} letters${isOn('hintToggle')?', starts "'+w.clean[0]+'"':''})`);
+    if(a!==null){const bl=document.querySelector(`.verse-blank[data-idx="${idx}"]`);bl.textContent=a;bl.classList.add('filled');bl.dataset.userAnswer=a;updFilled()}
+  }
+}
+function bankClick(el){
+  if(el.classList.contains('used'))return;
+  if(st.selBlank<0){const e=document.querySelectorAll('.verse-blank:not(.filled)');if(e.length)st.selBlank=parseInt(e[0].dataset.idx);else return}
+  const bl=document.querySelector(`.verse-blank[data-idx="${st.selBlank}"]`);if(!bl)return;
+  if(bl.classList.contains('filled')){const ow=bl.dataset.userAnswer;const oel=[...document.querySelectorAll('.wb-word.used')].find(w=>w.dataset.word===ow);if(oel)oel.classList.remove('used')}
+  bl.textContent=el.dataset.word;bl.classList.add('filled');bl.dataset.userAnswer=el.dataset.word;el.classList.add('used');
+  const all=[...document.querySelectorAll('.verse-blank')];const ci=all.findIndex(b=>parseInt(b.dataset.idx)===st.selBlank);
+  const nx=all.slice(ci+1).find(b=>!b.classList.contains('filled'));
+  st.selBlank=nx?parseInt(nx.dataset.idx):-1;
+  all.forEach(b=>b.style.boxShadow=parseInt(b.dataset.idx)===st.selBlank?'0 0 0 2px var(--acc)':'');
+  updFilled();
+}
+function updFilled(){const f=document.querySelectorAll('.verse-blank.filled').length;document.getElementById('gsFilled').textContent=f;document.getElementById('gameProg').style.width=Math.round(f/st.blankIdx.length*100)+'%'}
+
+function checkAnswers(){
+  const blanks=document.querySelectorAll('.verse-blank');
+  let ok=0,total=blanks.length;
+  const uid=st.current.ref+'|'+st.current.version;
+  const vd=st.verses.find(v=>v.uid===uid);if(!vd.wordMastery)vd.wordMastery={};
+  const norm=s=>s.toLowerCase().replace(/[^a-z'']/g,'');
+  blanks.forEach(b=>{
+    const ans=b.dataset.answer,usr=(b.dataset.userAnswer||b.textContent||'').trim();
+    const correct=norm(usr)===norm(ans);const k=ans.toLowerCase();
+    if(!vd.wordMastery[k])vd.wordMastery[k]={correct:0,wrong:0,total:0};vd.wordMastery[k].total++;
+    if(correct){b.classList.add('correct');b.classList.remove('wrong');vd.wordMastery[k].correct++;ok++}
+    else{b.classList.add('wrong');b.classList.remove('correct');vd.wordMastery[k].wrong++;b.innerHTML=`${esc(usr)||'—'}<div class="word-correction">${esc(ans)}</div>`}
+  });
+  document.querySelectorAll('.wb-word').forEach(w=>{
+    if([...blanks].find(b=>norm(b.dataset.answer)===norm(w.dataset.word)&&b.classList.contains('correct')))w.classList.add('wb-correct');
+  });
+  const pct=Math.round(ok/total*100);
+  const rb=document.getElementById('gameResult');rb.style.display='block';
+  rb.className='result-box '+(pct===100?'perfect':pct>=70?'good':'poor');
+  rb.innerHTML=`<div class="result-score" style="color:${pct===100?'var(--success)':pct>=70?'var(--yellow)':'var(--danger)'}">${pct}%</div><div class="result-msg">${pct===100?'🎉 Perfect!':pct>=70?'👍 Good job!':'Keep practicing!'}</div><div style="font-size:.8rem;color:var(--txt3)">${ok}/${total} · ${st.current.version}</div>`;
+  vd.lastPracticed=new Date().toISOString();vd.practiceCount=(vd.practiceCount||0)+1;
+  if(pct===100)vd.perfectCount=(vd.perfectCount||0)+1;
+  vd.overallPct=calcPct(vd);save();
+  document.getElementById('checkBtn').disabled=true;
+  if(pct===100&&isOn('masteryToggle')){const sl=document.getElementById('diffSlider');let v=parseInt(sl.value);if(v<90){v=Math.min(90,v+5);sl.value=v;updateDiffLabel();toast(`🏆 Difficulty → ${v}%!`,'success')}else toast('🏆 Max difficulty!','info')}
+  renderMastery();
+}
+function calcPct(vd){if(!vd.wordMastery)return 0;const w=Object.values(vd.wordMastery);if(!w.length)return 0;return Math.round(w.filter(v=>v.correct>=3).length/w.length*100)}
+
+function revealAll(){document.querySelectorAll('.verse-blank').forEach(b=>{if(!b.classList.contains('correct')&&!b.classList.contains('wrong')){b.textContent=b.dataset.answer;b.classList.add('correct')}});document.getElementById('checkBtn').disabled=true}
+function resetGame(){if(st.current)startFillBlanks()}
+
+function renderMastery(){
+  const uid=st.current?.ref+'|'+st.current?.version;
+  const vd=st.verses.find(v=>v.uid===uid);
+  const c=document.getElementById('wordMasteryList');
+  if(!vd?.wordMastery||!Object.keys(vd.wordMastery).length){c.innerHTML='<p style="color:var(--txt3);font-size:.8rem">Practice to see mastery data</p>';return}
+  const words=Object.entries(vd.wordMastery).sort((a,b)=>a[1].correct-b[1].correct);
+  c.innerHTML=words.map(([w,d])=>{const p=d.total>0?Math.round(d.correct/d.total*100):0;const cl=d.correct>=3?'var(--gold-m)':p>=70?'var(--green)':p>=40?'var(--yellow)':'var(--red)';
+    return`<div style="display:flex;align-items:center;gap:7px;padding:3px 0;font-size:.8rem"><span style="width:75px;font-weight:600">${esc(w)}</span><div style="flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden"><div style="height:100%;width:${p}%;background:${cl};border-radius:3px"></div></div><span style="color:${cl};font-weight:700;width:36px;text-align:right">${p}%</span><span style="color:var(--txt3);font-size:.68rem;width:50px">${d.correct}/${d.total}</span></div>`}).join('');
+}
+function resetWordMastery(){if(!st.current)return;if(!confirm('Reset word mastery?'))return;const uid=st.current.ref+'|'+st.current.version;const vd=st.verses.find(v=>v.uid===uid);if(vd){vd.wordMastery={};vd.overallPct=0;save();renderMastery();toast('Reset','info')}}
+
+// ======= FLASHCARDS =======
+function startFlashcard(){
+  if(!st.current){toast('Load a verse first','error');return}
+  const t=activeText();const w=t.split(/\s+/);st.fcCards=[];
+  const cs=Math.max(3,Math.floor(w.length/5));
+  for(let i=0;i<w.length;i+=cs){const p=w.slice(0,i).join(' ')||'Beginning...';const a=w.slice(i,i+cs).join(' ');if(a.trim())st.fcCards.push({p,a})}
+  st.fcCards.push({p:'Recite the full verse',a:t});
+  st.fcI=0;st.fcOk=0;renderFC();switchTab('flashcards');
+  document.getElementById('fcEmpty').style.display='none';document.getElementById('fcArea').style.display='block';
+}
+function renderFC(){
+  const c=st.fcCards[st.fcI];
+  document.getElementById('fcRef').innerHTML='📖 '+esc(st.current.ref)+' <span class="ver-badge">'+esc(st.current.version)+'</span>';
+  document.getElementById('fcPrompt').textContent=c.p.length>120?c.p.slice(0,120)+'...':c.p;
+  document.getElementById('fcAnswer').textContent=c.a;
+  document.getElementById('fcRefBack').textContent=st.current.ref+' ('+st.current.version+')';
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fcProgLabel').textContent=`Card ${st.fcI+1}/${st.fcCards.length}`;
+  document.getElementById('fcProg').style.width=Math.round(st.fcI/st.fcCards.length*100)+'%';
+  document.getElementById('fcScore').textContent=st.fcI>0?Math.round(st.fcOk/st.fcI*100)+'%':'0%';
+}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped')}
+function fcRate(r){
+  if(r===2)st.fcOk++;st.fcI++;
+  if(st.fcI>=st.fcCards.length){
+    const p=Math.round(st.fcOk/st.fcCards.length*100);
+    document.getElementById('fcProg').style.width='100%';document.getElementById('fcScore').textContent=p+'%';
+    document.getElementById('fcProgLabel').textContent='Done!';
+    toast(p===100?'🎉 Perfect!':'Done: '+p+'%',p===100?'success':'info');
+    const uid=st.current.ref+'|'+st.current.version;const vd=st.verses.find(v=>v.uid===uid);
+    if(vd){vd.lastPracticed=new Date().toISOString();vd.practiceCount++;if(p===100)vd.perfectCount++;save()}
+    st.fcI=0;st.fcOk=0;setTimeout(renderFC,2000);
+  }else renderFC();
+}
+
+// ======= LIBRARY =======
+function renderLibrary(){
+  const list=document.getElementById('libraryList'),emp=document.getElementById('libraryEmpty'),rc=document.getElementById('reviewCard');
+  if(!st.verses.length){list.innerHTML='';emp.style.display='block';rc.style.display='none';return}
+  emp.style.display='none';
+  const sorted=[...st.verses].sort((a,b)=>(a.overallPct||0)-(b.overallPct||0));
+  const now=Date.now();
+  const reviews=st.verses.filter(v=>(v.overallPct||0)>=90&&(!v.lastPracticed||(now-new Date(v.lastPracticed).getTime())/864e5>=3));
+  list.innerHTML=sorted.map(v=>{
+    const p=v.overallPct||0;const cc=p>=90?'si-gold':p>=61?'si-green':p>=26?'si-yellow':'si-red';
+    const cv=p>=90?'var(--gold-m)':p>=61?'var(--green)':p>=26?'var(--yellow)':'var(--red)';
+    const nr=reviews.includes(v);const ls=v.lastPracticed?timeSince(new Date(v.lastPracticed)):'Never';
+    return`<div class="saved-item ${cc}" onclick="loadLib('${esc(v.uid).replace(/'/g,"\\'")}')">
+      <div class="si-info"><div class="si-ref">${esc(v.ref)} <span class="si-badge ver-badge">${esc(v.version||'KJV')}</span>${nr?'<span class="si-badge review">🔁</span>':''}</div>
+      <div class="si-meta">${v.practiceCount||0}× · ${ls} · ${Object.keys(v.wordMastery||{}).length} words</div></div>
+      <div class="si-pct" style="color:${cv}">${p}%</div>
+      <button class="si-del" onclick="event.stopPropagation();delVerse('${esc(v.uid).replace(/'/g,"\\'")}')">🗑️</button>
+    </div>`;
+  }).join('');
+  if(reviews.length){
+    rc.style.display='block';
+    document.getElementById('reviewList').innerHTML=reviews.map(v=>{
+      const ds=v.lastPracticed?Math.floor((now-new Date(v.lastPracticed).getTime())/864e5):'∞';
+      return`<div class="saved-item si-gold" onclick="loadLib('${esc(v.uid).replace(/'/g,"\\'")}')"><div class="si-info"><div class="si-ref">🔁 ${esc(v.ref)} <span class="si-badge ver-badge">${esc(v.version)}</span></div><div class="si-meta">${ds}d since last practice</div></div><button class="btn btn-acc btn-xs" onclick="event.stopPropagation();loadLib('${esc(v.uid).replace(/'/g,"\\'")}')">Practice</button></div>`;
+    }).join('');
+  }else rc.style.display='none';
+}
+function loadLib(uid){const v=st.verses.find(x=>x.uid===uid);if(!v)return;loadVerse(v.ref,v.fullText,v.version);switchTab('search');toast('Loaded: '+v.ref+' ('+v.version+')','info')}
+function delVerse(uid){if(!confirm('Delete?'))return;st.verses=st.verses.filter(v=>v.uid!==uid);save();renderLibrary();toast('Removed','info')}
+function timeSince(d){const s=Math.floor((Date.now()-d.getTime())/1000);if(s<60)return'now';if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d'}
+
+// ======= INIT =======
+load();renderVersionGrid();selectVersion('niv');renderLibrary();
+</script>
+</body>
+</html>
