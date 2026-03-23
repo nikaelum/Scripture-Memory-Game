@@ -32,7 +32,8 @@ export default async function handler(req, res) {
         prompt = buildChunkPrompt(verse, reference, version);
     }
 
-    const model = process.env.GEMINI_MODEL || '"gemini-3.1-flash-lite-preview"';
+    // Default to the specific model requested unless overridden in environment variables
+    const model = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite-preview';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`;
 
     const geminiRes = await fetch(url, {
@@ -80,7 +81,6 @@ export default async function handler(req, res) {
   }
 }
 
-
 // ============================================================
 //  PROMPT BUILDERS
 // ============================================================
@@ -123,7 +123,6 @@ Return ONLY valid JSON in this exact format:
 }`;
 }
 
-
 function buildBlanksPrompt(verse, reference, difficulty) {
   const pct = difficulty || 30;
   return `You are a Bible memorization coach. Select the best words to blank out 
@@ -143,7 +142,7 @@ Rules:
 7. Never blank ALL words in a row — leave context anchors
 8. Consider which words are hardest to recall from memory
 
-The words of the verse (0-indexed): ${verse.split(/\\s+/).map((w, i) => `[${i}]="${w}"`).join(', ')}
+The words of the verse (0-indexed): ${verse.split(/\s+/).map((w, i) => `[${i}]="${w}"`).join(', ')}
 
 Return ONLY valid JSON:
 {
@@ -158,7 +157,6 @@ Return ONLY valid JSON:
   }
 }`;
 }
-
 
 function buildHintsPrompt(verse, reference) {
   return `You are a Bible memorization coach. Generate helpful memorization hints 
@@ -181,7 +179,6 @@ Return ONLY valid JSON:
   "storyMethod": "a mini-story linking the concepts in order"
 }`;
 }
-
 
 function buildAnalyzePrompt(verse, reference) {
   return `Analyze this Bible verse for memorization purposes.
