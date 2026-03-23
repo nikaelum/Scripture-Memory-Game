@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         prompt = buildChunkPrompt(verse, reference, version);
     }
 
-    const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-preview-05-20';
+    const model = process.env.GEMINI_MODEL || '"gemini-3.1-flash-lite-preview"';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`;
 
     const geminiRes = await fetch(url, {
