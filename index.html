@@ -7,65 +7,58 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0f0f1a;--bg2:#1a1a2e;--bg3:#252540;--card:#1e1e35;--card2:#2a2a4a;
-  --pri:#6c5ce7;--pri-lt:#a29bfe;--pri-dk:#5a4bd1;--pri-bg:rgba(108,92,231,.12);
-  --acc:#00cec9;--acc-lt:#55efc4;--acc-bg:rgba(0,206,201,.1);
-  --gold:#fdcb6e;--warn:#e17055;--danger:#d63031;--success:#00b894;
-  --txt:#e8e8f0;--txt2:#b0b0cc;--txt3:#7070a0;
-  --red:#ff6b6b;--yellow:#feca57;--green:#00b894;--gold-m:#f0c27f;
-  --brd:#3a3a5c;--sh:0 4px 20px rgba(0,0,0,.3);
-  --rad:16px;--rad-sm:12px;--rad-xs:8px;
-  --safe-top:env(safe-area-inset-top,0px);
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --safe-left:env(safe-area-inset-left,0px);
-  --safe-right:env(safe-area-inset-right,0px);
+ --bg:#0f0f1a;--bg2:#1a1a2e;--bg3:#252540;--card:#1e1e35;--card2:#2a2a4a;
+ --pri:#6c5ce7;--pri-lt:#a29bfe;--pri-dk:#5a4bd1;--pri-bg:rgba(108,92,231,.12);
+ --acc:#00cec9;--acc-lt:#55efc4;--acc-bg:rgba(0,206,201,.1);
+ --gold:#fdcb6e;--warn:#e17055;--danger:#d63031;--success:#00b894;
+ --txt:#e8e8f0;--txt2:#b0b0cc;--txt3:#7070a0;
+ --red:#ff6b6b;--yellow:#feca57;--green:#00b894;--gold-m:#f0c27f;
+ --brd:#3a3a5c;--sh:0 4px 20px rgba(0,0,0,.3);
+ --rad:16px;--rad-sm:12px;--rad-xs:8px;
+ --safe-top:env(safe-area-inset-top,0px);
+ --safe-bottom:env(safe-area-inset-bottom,0px);
+ --safe-left:env(safe-area-inset-left,0px);
+ --safe-right:env(safe-area-inset-right,0px);
 }
 html{height:-webkit-fill-available}
 body{
-  font-family:-apple-system,'SF Pro Display','Segoe UI',system-ui,sans-serif;
-  background:var(--bg);color:var(--txt);
-  min-height:100vh;min-height:-webkit-fill-available;
-  line-height:1.6;overflow-x:hidden;
-  padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
-  padding-left:var(--safe-left);padding-right:var(--safe-right);
+ font-family:-apple-system,'SF Pro Display','Segoe UI',system-ui,sans-serif;
+ background:var(--bg);color:var(--txt);
+ min-height:100vh;min-height:-webkit-fill-available;
+ line-height:1.6;overflow-x:hidden;
+ padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
+ padding-left:var(--safe-left);padding-right:var(--safe-right);
 }
 ::-webkit-scrollbar{width:0;display:none}
-
-/* ===== HEADER ===== */
 .app-header{
-  background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 50%,#16213e 100%);
-  padding:16px 20px 14px;text-align:center;
-  border-bottom:1px solid var(--brd);position:relative;overflow:hidden;
+ background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 50%,#16213e 100%);
+ padding:16px 20px 14px;text-align:center;
+ border-bottom:1px solid var(--brd);position:relative;overflow:hidden;
 }
 .app-header::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 30% 50%,rgba(108,92,231,.2),transparent 60%),
-  radial-gradient(circle at 70% 50%,rgba(0,206,201,.15),transparent 60%);
-  animation:headerPulse 4s ease-in-out infinite alternate;
+ content:'';position:absolute;inset:0;
+ background:radial-gradient(circle at 30% 50%,rgba(108,92,231,.2),transparent 60%),
+ radial-gradient(circle at 70% 50%,rgba(0,206,201,.15),transparent 60%);
+ animation:headerPulse 4s ease-in-out infinite alternate;
 }
-@keyframes headerPulse{
-  0%{opacity:.8}100%{opacity:1;filter:brightness(1.1)}
-}
+@keyframes headerPulse{0%{opacity:.8}100%{opacity:1;filter:brightness(1.1)}}
 .app-header h1{
-  font-size:1.4rem;font-weight:800;position:relative;
-  background:linear-gradient(135deg,var(--pri-lt),var(--acc));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+ font-size:1.4rem;font-weight:800;position:relative;
+ background:linear-gradient(135deg,var(--pri-lt),var(--acc));
+ -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+ background-clip:text;
 }
 .app-header p{font-size:.75rem;color:var(--txt3);position:relative;margin-top:2px}
-
-/* ===== TAB NAV ===== */
 .tab-nav{
-  display:flex;background:var(--bg2);
-  border-bottom:1px solid var(--brd);
-  position:sticky;top:0;z-index:100;
-  padding-bottom:0;
+ display:flex;background:var(--bg2);
+ border-bottom:1px solid var(--brd);
+ position:sticky;top:0;z-index:100;padding-bottom:0;
 }
 .tab-btn{
-  flex:1;padding:10px 4px 8px;border:none;background:none;
-  color:var(--txt3);cursor:pointer;font-size:.68rem;font-weight:600;
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  transition:all .3s ease;position:relative;
+ flex:1;padding:10px 4px 8px;border:none;background:none;
+ color:var(--txt3);cursor:pointer;font-size:.68rem;font-weight:600;
+ display:flex;flex-direction:column;align-items:center;gap:3px;
+ transition:all .3s ease;position:relative;
 }
 .tab-btn .ti{font-size:1.2rem;transition:transform .3s ease}
 .tab-btn:active .ti{transform:scale(.85)}
@@ -73,50 +66,39 @@ body{
 .tab-btn.active{color:var(--acc)}
 .tab-btn.active .ti{animation:tabBounce .4s ease}
 .tab-btn.active::after{
-  content:'';position:absolute;bottom:0;left:20%;right:20%;
-  height:3px;background:var(--acc);border-radius:3px 3px 0 0;
-  animation:slideIn .3s ease;
+ content:'';position:absolute;bottom:0;left:20%;right:20%;
+ height:3px;background:var(--acc);border-radius:3px 3px 0 0;
+ animation:slideIn .3s ease;
 }
 @keyframes tabBounce{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 @keyframes slideIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-/* ===== MAIN ===== */
 .main{max-width:402px;margin:0 auto;padding:12px 16px 100px}
-
-/* ===== PANELS ===== */
 .panel{display:none}.panel.active{display:block;animation:fadeUp .4s cubic-bezier(.22,1,.36,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-
-/* ===== CARDS ===== */
 .card{
-  background:var(--card);border-radius:var(--rad);
-  border:1px solid var(--brd);padding:16px;
-  margin-bottom:12px;position:relative;overflow:hidden;
-  animation:cardIn .5s ease backwards;
+ background:var(--card);border-radius:var(--rad);
+ border:1px solid var(--brd);padding:16px;
+ margin-bottom:12px;position:relative;overflow:hidden;
+ animation:cardIn .5s ease backwards;
 }
 .card:nth-child(2){animation-delay:.1s}
 .card:nth-child(3){animation-delay:.2s}
 @keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
 .card h2{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .card h3{font-size:.88rem;font-weight:600;margin-bottom:8px;color:var(--txt2)}
-
-/* ===== INPUTS ===== */
 .search-row{display:flex;gap:8px;margin-bottom:10px;flex-direction:column}
 .search-row input{
-  width:100%;padding:12px 16px;background:var(--bg3);
-  border:2px solid var(--brd);border-radius:var(--rad-sm);
-  color:var(--txt);font-size:.9rem;font-family:inherit;
-  transition:border-color .3s;
+ width:100%;padding:12px 16px;background:var(--bg3);
+ border:2px solid var(--brd);border-radius:var(--rad-sm);
+ color:var(--txt);font-size:.9rem;font-family:inherit;transition:border-color .3s;
 }
 .search-row input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 4px rgba(108,92,231,.15)}
-
-/* ===== BUTTONS ===== */
 .btn{
-  padding:12px 20px;border:none;border-radius:var(--rad-sm);
-  font-size:.82rem;font-weight:600;cursor:pointer;
-  transition:all .3s ease;display:inline-flex;align-items:center;
-  gap:6px;font-family:inherit;-webkit-user-select:none;user-select:none;
-  min-height:44px;justify-content:center;
+ padding:12px 20px;border:none;border-radius:var(--rad-sm);
+ font-size:.82rem;font-weight:600;cursor:pointer;
+ transition:all .3s ease;display:inline-flex;align-items:center;
+ gap:6px;font-family:inherit;-webkit-user-select:none;user-select:none;
+ min-height:44px;justify-content:center;
 }
 .btn:active{transform:scale(.96)!important}
 .btn-pri{background:linear-gradient(135deg,var(--pri),var(--pri-dk));color:#fff;box-shadow:0 4px 15px rgba(108,92,231,.3)}
@@ -131,162 +113,104 @@ body{
 .btn-full{width:100%}
 .btn .spin{display:inline-block;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ===== VERSION GRID ===== */
-.ver-section{background:var(--bg3);border-radius:var(--rad-sm);padding:12px;margin-bottom:10px;border:1px solid var(--brd)}
-.ver-section-title{font-size:.72rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
-.ver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.ver-chip{
-  padding:8px 6px;background:var(--card);border:2px solid var(--brd);
-  border-radius:var(--rad-xs);cursor:pointer;transition:all .3s;
-  text-align:center;position:relative;
-}
-.ver-chip:active{transform:scale(.95)}
-.ver-chip.selected{border-color:var(--acc);background:var(--acc-bg);box-shadow:0 0 12px rgba(0,206,201,.15)}
-.ver-chip .vc-abbr{font-size:.82rem;font-weight:800;color:var(--txt)}
-.ver-chip.selected .vc-abbr{color:var(--acc)}
-.ver-chip .vc-name{font-size:.56rem;color:var(--txt3);line-height:1.2;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ver-chip .vc-api{position:absolute;top:2px;right:4px;font-size:.46rem;padding:1px 3px;border-radius:3px;font-weight:700;background:var(--bg);color:var(--txt3)}
-.ver-chip .vc-api.free{color:var(--success)}
 .ver-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--pri-bg);border:1px solid rgba(108,92,231,.25);border-radius:20px;font-size:.68rem;color:var(--pri-lt);font-weight:700;}
-.api-status{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;padding:2px 8px;border-radius:10px;font-weight:500}
-.api-status.online{background:rgba(0,184,148,.12);color:var(--success)}
-.api-status.offline{background:rgba(214,48,49,.12);color:var(--danger)}
-.api-status.checking{background:rgba(253,203,110,.12);color:var(--gold)}
-
-/* ===== VERSE REFERENCE DISPLAY ===== */
 .verse-ref-card{
-  background:linear-gradient(135deg,rgba(108,92,231,.15),rgba(0,206,201,.1));
-  border:1px solid rgba(108,92,231,.3);border-radius:var(--rad);
-  padding:16px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden;
+ background:linear-gradient(135deg,rgba(108,92,231,.15),rgba(0,206,201,.1));
+ border:1px solid rgba(108,92,231,.3);border-radius:var(--rad);
+ padding:16px;text-align:center;margin-bottom:12px;position:relative;overflow:hidden;
 }
 .verse-ref-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 0%,rgba(108,92,231,.1),transparent 70%);
+ content:'';position:absolute;inset:0;
+ background:radial-gradient(circle at 50% 0%,rgba(108,92,231,.1),transparent 70%);
 }
 .verse-ref-card .ref-book{font-size:1.3rem;font-weight:800;color:var(--txt);position:relative;animation:refFadeIn .6s ease backwards;}
 .verse-ref-card .ref-detail{font-size:.78rem;color:var(--txt2);margin-top:4px;position:relative;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;animation:refFadeIn .6s ease .1s backwards;}
-.verse-ref-card .ref-detail span{padding:2px 8px;background:rgba(255,255,255,.05);border-radius:12px;}
 .verse-ref-card .ref-version{margin-top:6px;position:relative;animation:refFadeIn .6s ease .2s backwards;}
+.verse-ref-card .mastery-info{margin-top:8px;position:relative;animation:refFadeIn .6s ease .3s backwards;}
 @keyframes refFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* ===== SETTINGS ===== */
+/* Verse Preview */
+.verse-preview{background:var(--bg3);border-radius:var(--rad-sm);padding:14px;margin-top:10px;border:1px solid var(--brd)}
+.vp-ref{font-weight:700;color:var(--acc);margin-bottom:6px;font-size:.92rem}
+.vp-text{font-size:.85rem;color:var(--txt2);line-height:1.7}
+.vp-mastery{margin-top:8px;font-size:.78rem;color:var(--txt3)}
+/* Fallback Box */
+.fallback-box{background:rgba(225,112,85,.1);border:1px solid rgba(225,112,85,.3);border-radius:var(--rad-sm);padding:12px;margin-top:8px;font-size:.82rem;color:var(--warn)}
+/* Settings */
 .slider-group{margin:14px 0}
 .slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:.82rem;font-weight:600}
 .slider-label .sl-val{color:var(--acc);font-size:1rem;font-weight:800}
-input[type="range"]{
-  -webkit-appearance:none;width:100%;height:8px;
-  background:var(--bg3);border-radius:4px;outline:none;
-}
-input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:28px;height:28px;
-  border-radius:50%;background:var(--pri);cursor:pointer;
-  border:3px solid var(--card);box-shadow:0 2px 8px rgba(108,92,231,.4);
-}
+input[type="range"]{-webkit-appearance:none;width:100%;height:8px;background:var(--bg3);border-radius:4px;outline:none;}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--pri);cursor:pointer;border:3px solid var(--card);box-shadow:0 2px 8px rgba(108,92,231,.4);}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .toggle-row:last-child{border-bottom:none}
 .toggle-row .tl{font-size:.82rem;color:var(--txt2);flex:1}
 .toggle-row .tl small{display:block;font-size:.68rem;color:var(--txt3);font-weight:400}
-.switch{
-  width:50px;height:30px;background:var(--bg3);border-radius:15px;
-  cursor:pointer;position:relative;transition:.3s;
-  border:2px solid var(--brd);flex-shrink:0;
-}
+.switch{width:50px;height:30px;background:var(--bg3);border-radius:15px;cursor:pointer;position:relative;transition:.3s;border:2px solid var(--brd);flex-shrink:0;}
 .switch.on{background:var(--pri);border-color:var(--pri)}
 .switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.3s}
 .switch.on::after{left:23px}
-
-/* ===== NEW GAME MODES GRID ===== */
-.mode-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin: 12px 0;
-}
-.mode-grid .btn { min-height: 40px; font-size: 0.78rem; justify-content: flex-start; padding-left: 12px; }
-.mode-grid .btn-full { grid-column: span 2; justify-content: center; }
-
-/* ===== GAME ELEMENTS ===== */
+.mode-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0;}
+.mode-grid .btn{min-height:40px;font-size:0.78rem;justify-content:flex-start;padding-left:12px;}
+.mode-grid .btn-full{grid-column:span 2;justify-content:center;}
+/* Game Elements */
 .game-stats-row{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
 .game-stat{background:var(--bg3);border-radius:var(--rad-xs);padding:6px 12px;font-size:.74rem;color:var(--txt2);font-weight:500;}
 .game-stat span{color:var(--acc);font-weight:700}
 .verse-display{font-size:.95rem;line-height:2.6;padding:8px 4px;word-wrap:break-word;min-height:100px;position:relative;}
-
-/* ===== BLANKS MODE ===== */
+/* Blanks Mode */
 .verse-blank{
-  display:inline-flex;align-items:center;justify-content:center;min-width:50px;min-height:32px;
-  border-bottom:2px solid var(--pri-lt);padding:3px 6px;margin:3px 2px;
-  transition:all .3s ease;background:var(--pri-bg);border-radius:6px 6px 0 0;
-  vertical-align:bottom;text-align:center;font-weight:600;color:var(--pri-lt);
-  position:relative;line-height:1.4;font-size:.88rem;cursor:pointer;
+ display:inline-flex;align-items:center;justify-content:center;min-width:50px;min-height:32px;
+ border-bottom:2px solid var(--pri-lt);padding:3px 6px;margin:3px 2px;
+ transition:all .3s ease;background:var(--pri-bg);border-radius:6px 6px 0 0;
+ vertical-align:bottom;text-align:center;font-weight:600;color:var(--pri-lt);
+ position:relative;line-height:1.4;font-size:.88rem;cursor:pointer;
 }
 .verse-blank.drop-hover{border-color:var(--acc);background:var(--acc-bg);box-shadow:0 0 12px rgba(0,206,201,.3);transform:scale(1.05);}
 .verse-blank.filled{color:var(--acc);border-color:var(--acc);animation:fillPop .3s ease}
 @keyframes fillPop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 .verse-blank.correct{color:var(--success);border-color:var(--success);background:rgba(0,184,148,.1);animation:correctPulse .5s ease;}
-@keyframes correctPulse{
-  0%{transform:scale(1);box-shadow:none}
-  50%{transform:scale(1.05);box-shadow:0 0 20px rgba(0,184,148,.4)}
-  100%{transform:scale(1);box-shadow:none}
-}
+@keyframes correctPulse{0%{transform:scale(1);box-shadow:none}50%{transform:scale(1.05);box-shadow:0 0 20px rgba(0,184,148,.4)}100%{transform:scale(1);box-shadow:none}}
 .verse-blank.wrong{color:var(--danger);border-color:var(--danger);background:rgba(214,48,49,.1);animation:shake .5s ease;}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
-
-.word-bank{
-  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
-  margin:14px 0;padding:14px;background:var(--bg3);
-  border-radius:var(--rad-sm);border:2px dashed var(--brd);min-height:60px;
-}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0;padding:14px;background:var(--bg3);border-radius:var(--rad-sm);border:2px dashed var(--brd);min-height:60px;}
 .word-bank-label{width:100%;text-align:center;font-size:.7rem;color:var(--txt3);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
-.wb-word{
-  padding:8px 16px;background:var(--card2);border:1px solid var(--brd);border-radius:22px;
-  font-size:.84rem;cursor:pointer;transition:all .2s;color:var(--txt);font-weight:500;
-  user-select:none;-webkit-user-select:none;touch-action:none;min-height:38px;display:flex;align-items:center;
-}
+.wb-word{padding:8px 16px;background:var(--card2);border:1px solid var(--brd);border-radius:22px;font-size:.84rem;cursor:pointer;transition:all .2s;color:var(--txt);font-weight:500;user-select:none;-webkit-user-select:none;touch-action:none;min-height:38px;display:flex;align-items:center;}
 .wb-word:active{transform:scale(0.95)}
 .wb-word.dragging{opacity:.3;transform:scale(.9);}
 .wb-word.used{opacity:.2;pointer-events:none;text-decoration:line-through;transform:scale(.9);}
-
-/* ===== ERASER MODE ===== */
-.eraser-word { transition: opacity 0.5s ease; }
-.eraser-word.hidden { opacity: 0; }
-.eraser-blank { border-bottom: 2px solid var(--brd); display: inline-block; margin: 0 2px; }
-
-/* ===== FIRST LETTER MODE ===== */
-.fl-word { display: inline-block; margin: 0 4px; font-family: monospace; font-size: 1.1rem; }
-.fl-word.active { color: var(--acc); font-weight: bold; border-bottom: 2px solid var(--acc); }
-.fl-word.done { color: var(--success); }
-
-/* ===== SCRAMBLE MODE ===== */
-.scramble-zone { min-height: 80px; padding: 12px; border-radius: var(--rad-sm); background: var(--bg3); margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
-.scramble-zone.target { border: 2px dashed var(--pri); }
-.scramble-chip { padding: 8px 12px; background: var(--card2); border-radius: var(--rad-xs); font-size: 0.85rem; cursor: pointer; border: 1px solid var(--brd); box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-.scramble-chip:active { transform: scale(0.95); }
-
-/* ===== TYPIST MODE ===== */
-.typist-container { position: relative; font-size: 1.2rem; font-family: monospace; line-height: 1.8; margin-top: 10px; }
-.typist-bg { color: var(--txt3); position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 1; }
-.typist-fg { position: relative; z-index: 2; color: var(--acc); white-space: pre-wrap; word-break: break-all; }
-.typist-cursor { display: inline-block; width: 2px; height: 1.2em; background: var(--acc); vertical-align: bottom; animation: blink 1s infinite; }
-.typist-error { background: rgba(214,48,49,.3); color: var(--danger); border-radius: 2px; }
-@keyframes blink { 50% { opacity: 0; } }
-
-/* ===== MULTI CHOICE MODE ===== */
-.mc-blank { padding: 4px 8px; background: var(--card2); border: 2px solid var(--pri-lt); border-radius: var(--rad-xs); color: var(--pri-lt); font-weight: bold; cursor: pointer; font-size: 0.85rem; margin: 0 4px; display: inline-block; }
-.mc-blank.filled { border-color: var(--success); color: var(--success); background: rgba(0,184,148,.1); }
-.mc-blank.wrong { border-color: var(--danger); color: var(--danger); background: rgba(214,48,49,.1); }
-.mc-options { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-.mc-option { padding: 12px; background: var(--bg3); border-radius: var(--rad-sm); border: 1px solid var(--brd); text-align: center; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
-.mc-option:active { background: var(--pri-bg); border-color: var(--pri); }
-
-/* ===== RECITE MODE ===== */
-.mic-btn { width: 80px; height: 80px; border-radius: 50%; background: var(--pri); color: white; border: none; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 20px auto; cursor: pointer; box-shadow: 0 8px 20px rgba(108,92,231,.4); transition: all 0.3s ease; }
-.mic-btn.recording { background: var(--danger); box-shadow: 0 0 0 10px rgba(214,48,49,.2); animation: pulse 1.5s infinite; }
-.recite-transcript { padding: 16px; background: var(--bg3); border-radius: var(--rad-sm); font-style: italic; min-height: 80px; margin-top: 16px; color: var(--txt2); }
-.recite-match { color: var(--success); font-weight: bold; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(214,48,49,.4); } 70% { box-shadow: 0 0 0 20px rgba(214,48,49,0); } 100% { box-shadow: 0 0 0 0 rgba(214,48,49,0); } }
-
-/* ===== OTHER UI ELEMENTS ===== */
+/* Eraser Mode */
+.eraser-word{transition:opacity 0.5s ease;}.eraser-word.hidden{opacity:0;}
+.eraser-blank{border-bottom:2px solid var(--brd);display:inline-block;margin:0 2px;}
+/* First Letter Mode */
+.fl-word{display:inline-block;margin:0 4px;font-family:monospace;font-size:1.1rem;}
+.fl-word.active{color:var(--acc);font-weight:bold;border-bottom:2px solid var(--acc);}
+.fl-word.done{color:var(--success);}
+/* Scramble Mode */
+.scramble-zone{min-height:80px;padding:12px;border-radius:var(--rad-sm);background:var(--bg3);margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;}
+.scramble-zone.target{border:2px dashed var(--pri);}
+.scramble-chip{padding:8px 12px;background:var(--card2);border-radius:var(--rad-xs);font-size:0.85rem;cursor:pointer;border:1px solid var(--brd);box-shadow:0 2px 4px rgba(0,0,0,0.2);}
+.scramble-chip:active{transform:scale(0.95);}
+/* Typist Mode */
+.typist-container{position:relative;font-size:1.2rem;font-family:monospace;line-height:1.8;margin-top:10px;}
+.typist-bg{color:var(--txt3);position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:1;}
+.typist-fg{position:relative;z-index:2;color:var(--acc);white-space:pre-wrap;word-break:break-all;}
+.typist-cursor{display:inline-block;width:2px;height:1.2em;background:var(--acc);vertical-align:bottom;animation:blink 1s infinite;}
+.typist-error{background:rgba(214,48,49,.3);color:var(--danger);border-radius:2px;}
+@keyframes blink{50%{opacity:0;}}
+/* Multi Choice Mode */
+.mc-blank{padding:4px 8px;background:var(--card2);border:2px solid var(--pri-lt);border-radius:var(--rad-xs);color:var(--pri-lt);font-weight:bold;cursor:pointer;font-size:0.85rem;margin:0 4px;display:inline-block;}
+.mc-blank.filled{border-color:var(--success);color:var(--success);background:rgba(0,184,148,.1);}
+.mc-blank.wrong{border-color:var(--danger);color:var(--danger);background:rgba(214,48,49,.1);}
+.mc-options{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.mc-option{padding:12px;background:var(--bg3);border-radius:var(--rad-sm);border:1px solid var(--brd);text-align:center;cursor:pointer;font-weight:bold;font-size:0.9rem;}
+.mc-option:active{background:var(--pri-bg);border-color:var(--pri);}
+/* Recite Mode */
+.mic-btn{width:80px;height:80px;border-radius:50%;background:var(--pri);color:white;border:none;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:20px auto;cursor:pointer;box-shadow:0 8px 20px rgba(108,92,231,.4);transition:all 0.3s ease;}
+.mic-btn.recording{background:var(--danger);box-shadow:0 0 0 10px rgba(214,48,49,.2);animation:pulse 1.5s infinite;}
+.recite-transcript{padding:16px;background:var(--bg3);border-radius:var(--rad-sm);font-style:italic;min-height:80px;margin-top:16px;color:var(--txt2);}
+.recite-match{color:var(--success);font-weight:bold;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(214,48,49,.4);}70%{box-shadow:0 0 0 20px rgba(214,48,49,0);}100%{box-shadow:0 0 0 0 rgba(214,48,49,0);}}
+/* Other UI */
 .drag-clone{position:fixed;z-index:10000;pointer-events:none;padding:8px 16px;background:var(--pri);color:#fff;border-radius:22px;font-size:.84rem;font-weight:600;box-shadow:0 8px 30px rgba(108,92,231,.5);transform:scale(1.1);transition:transform .1s;animation:dragPickup .2s ease;}
 @keyframes dragPickup{from{transform:scale(.8);opacity:.5}to{transform:scale(1.1);opacity:1}}
 .progress-bar{width:100%;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin:8px 0}
@@ -306,6 +230,7 @@ input[type="range"]::-webkit-slider-thumb{
 .toast.success{background:linear-gradient(135deg,var(--success),#00a381)}
 .toast.error{background:linear-gradient(135deg,var(--danger),#c0392b)}
 .toast.info{background:linear-gradient(135deg,var(--pri),var(--pri-dk))}
+.toast.warn{background:linear-gradient(135deg,var(--warn),#d35400)}
 @keyframes toastIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
 @keyframes toastOut{to{opacity:0;transform:translateY(-20px)}}
 .empty-msg{text-align:center;padding:40px 20px;color:var(--txt3)}
@@ -314,8 +239,35 @@ input[type="range"]::-webkit-slider-thumb{
 .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:9998;overflow:hidden}
 .confetti{position:absolute;width:8px;height:8px;border-radius:2px;animation:confettiFall var(--dur) cubic-bezier(.25,.46,.45,.94) forwards;}
 @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(100vh) rotate(720deg) scale(0);opacity:0}}
-.particle{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:9997;animation:particleBurst .6s ease-out forwards;}
-@keyframes particleBurst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+/* ===== LIBRARY ITEMS (was missing!) ===== */
+.saved-item{
+ display:flex;align-items:center;justify-content:space-between;
+ padding:12px;margin-bottom:8px;background:var(--bg3);
+ border-radius:var(--rad-sm);border-left:4px solid var(--pri);
+ cursor:pointer;transition:all .2s ease;gap:10px;
+}
+.saved-item:active{transform:scale(.98);background:var(--card2)}
+.si-info{flex:1;min-width:0}
+.si-ref{font-size:.85rem;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.si-meta{font-size:.7rem;color:var(--txt3);margin-top:3px}
+.si-mastery{font-size:.68rem;color:var(--acc);margin-top:2px}
+.si-pct{font-size:1.1rem;font-weight:900;flex-shrink:0}
+.si-actions{display:flex;gap:4px;flex-shrink:0}
+.si-del{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:1rem;padding:4px;border-radius:4px;transition:.2s}
+.si-del:hover{color:var(--danger);background:rgba(214,48,49,.1)}
+/* Mastery Level Badge */
+.mastery-badge{
+ display:inline-flex;align-items:center;gap:4px;
+ padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;
+}
+.mastery-badge.beginner{background:rgba(112,112,160,.15);color:var(--txt3)}
+.mastery-badge.familiar{background:rgba(254,202,87,.12);color:var(--yellow)}
+.mastery-badge.proficient{background:rgba(0,184,148,.12);color:var(--success)}
+.mastery-badge.advanced{background:rgba(108,92,231,.15);color:var(--pri-lt)}
+.mastery-badge.mastered{background:linear-gradient(135deg,rgba(240,194,127,.15),rgba(253,203,110,.15));color:var(--gold)}
+/* Eraser textarea */
+.eraser-textarea{width:100%;min-height:100px;padding:12px;background:var(--bg3);border:2px solid var(--brd);border-radius:var(--rad-sm);color:var(--txt);font-size:.9rem;font-family:inherit;resize:vertical;}
+.eraser-textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 4px rgba(108,92,231,.15)}
 </style>
 </head>
 <body>
@@ -328,9 +280,8 @@ input[type="range"]::-webkit-slider-thumb{
 <button class="tab-btn" onclick="switchTab('practice')" data-tab="practice"><span class="ti">🎮</span>Play</button>
 <button class="tab-btn" onclick="switchTab('library')" data-tab="library"><span class="ti">📚</span>Library</button>
 </nav>
-
 <main class="main">
-<!-- ===== SEARCH PANEL ===== -->
+<!-- SEARCH PANEL -->
 <div class="panel active" id="tab-search">
 <div class="card">
 <h2>🔍 Find a Verse</h2>
@@ -339,856 +290,1026 @@ input[type="range"]::-webkit-slider-thumb{
 <button class="btn btn-pri btn-full" id="fetchBtn" onclick="fetchVerse()">🔍 Search</button>
 </div>
 <div id="fallbackBox" class="fallback-box" style="display:none">
-<p>⚠️ Couldn't auto-fetch. Try a Public Domain version (KJV, WEB) or paste manually.</p>
+<p>⚠️ Couldn't auto-fetch. Try a different reference or check your connection.</p>
 </div>
 <div id="versePreview" style="display:none"></div>
 </div>
-
 <div id="verseSettings" style="display:none">
 <div class="card">
 <h2>⚙️ Practice Settings</h2>
 <div class="slider-group">
 <div class="slider-label"><span>Difficulty</span><span class="sl-val" id="diffLabel">30%</span></div>
 <input type="range" id="diffSlider" min="10" max="90" value="30" step="5" oninput="updateDiffLabel()">
+<div id="masteryDiffNote" style="display:none;font-size:.7rem;color:var(--acc);margin-top:4px;text-align:center"></div>
 </div>
-<div class="toggle-row"><div class="tl"><strong>💡 Hints</strong><small>Show first letter of hidden words</small></div><div class="switch" id="hintToggle" onclick="toggleSwitch(this)"></div></div>
-<div class="toggle-row"><div class="tl"><strong>📈 Mastery Mode</strong><small>Auto-increase difficulty on perfect</small></div><div class="switch on" id="masteryToggle" onclick="toggleSwitch(this)"></div></div>
-
-<h2 style="margin-top: 16px;">🎮 Select Game Mode</h2>
+<div class="toggle-row"><div class="tl"><strong>Show Hints</strong><small>Show first letter of hidden words</small></div><div class="switch" id="hintToggle" onclick="toggleSwitch(this)"></div></div>
+<div class="toggle-row"><div class="tl"><strong>Mastery Mode</strong><small>Auto-increase difficulty on perfect score</small></div><div class="switch on" id="masteryToggle" onclick="toggleSwitch(this)"></div></div>
+<h2 style="margin-top:16px;">🎮 Select Game Mode</h2>
 <div class="mode-grid">
-  <button class="btn btn-ghost" onclick="startGame('blanks')">✍️ Fill Blanks</button>
-  <button class="btn btn-ghost" onclick="startGame('eraser')">🧽 Eraser</button>
-  <button class="btn btn-ghost" onclick="startGame('firstLetter')">🔠 First Letter</button>
-  <button class="btn btn-ghost" onclick="startGame('scramble')">🧩 Scramble</button>
+  <button class="btn btn-ghost" onclick="startGame('blanks')">📝 Fill Blanks</button>
+  <button class="btn btn-ghost" onclick="startGame('eraser')">🧹 Eraser</button>
+  <button class="btn btn-ghost" onclick="startGame('firstLetter')">🔤 First Letter</button>
+  <button class="btn btn-ghost" onclick="startGame('scramble')">🔀 Scramble</button>
   <button class="btn btn-ghost" onclick="startGame('typist')">⌨️ Speed Typist</button>
-  <button class="btn btn-ghost" onclick="startGame('choice')">🤔 Multi-Choice</button>
+  <button class="btn btn-ghost" onclick="startGame('choice')">🎯 Multi-Choice</button>
 </div>
 <div class="btn-row">
-  <button class="btn btn-ghost btn-full" onclick="startGame('recite')">🎤 Recite & Check</button>
+  <button class="btn btn-ghost btn-full" onclick="startGame('recite')">🎙️ Recite &amp; Check</button>
 </div>
 </div>
 </div>
 </div>
-
-<!-- ===== PRACTICE PANEL ===== -->
+<!-- PRACTICE PANEL -->
 <div class="panel" id="tab-practice">
 <div id="practiceEmpty" class="empty-msg"><span class="em-icon">🎮</span><p>Find a verse and pick a game mode!</p></div>
 <div id="practiceArea" style="display:none">
 <div id="gameRefCard"></div>
 <div class="card" id="gameCard">
-  <!-- Dynamic Game Container -->
-  <div id="gameContainer"></div>
-  
-  <div id="gameResult" style="display:none"></div>
-  <div class="btn-row" style="justify-content:center" id="gameControls">
-    <!-- Buttons dynamically injected based on mode -->
-  </div>
+ <div id="gameContainer"></div>
+ <div id="gameResult" style="display:none"></div>
+ <div class="btn-row" style="justify-content:center" id="gameControls"></div>
 </div>
 </div>
 </div>
-
-<!-- ===== LIBRARY PANEL ===== -->
+<!-- LIBRARY PANEL -->
 <div class="panel" id="tab-library">
 <div class="card">
 <h2>📚 Saved Verses</h2>
 <div id="libraryList"></div>
-<div id="libraryEmpty" class="empty-msg" style="display:none"><span class="em-icon">📚</span><p>No saved verses yet</p></div>
+<div id="libraryEmpty" class="empty-msg" style="display:none"><span class="em-icon">📚</span><p>No saved verses yet. Search for a verse to get started!</p></div>
 </div>
 </div>
 </main>
-
 <div class="toast-container" id="toastContainer"></div>
 <div class="confetti-container" id="confettiContainer"></div>
-
-<!-- Hidden Input for mobile typing capture -->
 <input type="text" id="hiddenInput" style="position:absolute;opacity:0;pointer-events:none;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-
 <script>
 // ======= CONSTANTS & STATE =======
-const SK='smg_data_v4';
+const SK='smg_data_v5';
 const STOP=new Set('the a an and or but in on at to for of is it was be are am been being have has had do does did will would shall should may might can could not no so if by with from as than that this these those he she they them his her its their we our you your my me us him i up out all into who what when where which how there here then also just very too yet nor both each any some own such other per o ye thee thy thou hath unto upon doth saith wherefore thereof'.split(' '));
-
 let st={
-  verses:[], current:null, chunkIndex:-1,
-  gameMode: null, modeData: {}, blankIdx:[], selBlank:-1
+ verses:[], current:null, chunkIndex:-1,
+ gameMode:null, modeData:{}, blankIdx:[], selBlank:-1
 };
 let dragState={active:false,el:null,clone:null,word:'',srcEl:null,dragged:false,startX:0,startY:0};
-let selectedVersion='niv';
 
-// Simple Dictionary for Traps
 const TRAP_DICT = {
-  'god':['Lord','Jesus','Creator','Father'], 'lord':['God','Master','King','Jesus'],
-  'he':['she','they','it','we'], 'she':['he','they','it','we'],
-  'the':['a','this','that','an'], 'a':['the','an','some','one'],
-  'is':['was','are','has','be'], 'was':['is','were','had','been'],
-  'in':['on','at','to','for'], 'on':['in','at','above','by'],
-  'and':['but','or','so','yet'], 'but':['and','or','if','so'],
-  'not':['never','always','no','yes'], 'all':['some','none','many','few']
+ 'god':['Lord','Jesus','Creator','Father'],'lord':['God','Master','King','Jesus'],
+ 'he':['she','they','it','we'],'she':['he','they','it','we'],
+ 'the':['a','this','that','an'],'a':['the','an','some','one'],
+ 'is':['was','are','has','be'],'was':['is','were','had','been'],
+ 'in':['on','at','to','for'],'on':['in','at','above','by'],
+ 'and':['but','or','so','yet'],'but':['and','or','if','so'],
+ 'not':['never','always','no','yes'],'all':['some','none','many','few'],
+ 'will':['shall','can','may','would'],'shall':['will','must','can','should'],
+ 'love':['hate','fear','know','serve'],'heart':['mind','soul','spirit','body'],
+ 'faith':['hope','love','grace','truth'],'sin':['evil','death','curse','flesh'],
+ 'life':['death','light','truth','way'],'light':['dark','life','truth','glory'],
+ 'world':['earth','land','heaven','kingdom'],'heaven':['earth','world','sky','glory'],
+ 'word':['law','truth','light','way'],'spirit':['flesh','soul','heart','mind'],
+ 'for':['but','and','yet','so'],'with':['from','by','through','in'],
+ 'are':['is','was','were','be'],'have':['had','has','hold','keep'],
+ 'you':['we','they','he','she'],'your':['our','my','his','their'],
+ 'we':['you','they','he','she'],'our':['your','my','his','their'],
+ 'his':['her','its','your','their'],'her':['his','your','its','our'],
+ 'my':['your','his','our','their'],'me':['you','him','us','them'],
 };
 
+const MASTERY_LABELS = [
+ {name:'Beginner',cls:'beginner',icon:'🌱'},
+ {name:'Learning',cls:'beginner',icon:'📖'},
+ {name:'Familiar',cls:'familiar',icon:'⭐'},
+ {name:'Familiar+',cls:'familiar',icon:'⭐'},
+ {name:'Proficient',cls:'proficient',icon:'🌟'},
+ {name:'Proficient+',cls:'proficient',icon:'🌟'},
+ {name:'Advanced',cls:'advanced',icon:'💪'},
+ {name:'Advanced+',cls:'advanced',icon:'💪'},
+ {name:'Expert',cls:'advanced',icon:'🏆'},
+ {name:'Near Master',cls:'mastered',icon:'👑'},
+ {name:'Mastered!',cls:'mastered',icon:'🎓'},
+];
+
 // ======= HELPERS =======
-function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d?.verses)st.verses=d.verses}catch(e){}}
+function load(){
+ try{
+  const d=JSON.parse(localStorage.getItem(SK));
+  if(d?.verses) st.verses=d.verses;
+  // Migrate from older version
+  st.verses.forEach(v=>{
+   if(v.masteryLevel===undefined) v.masteryLevel=0;
+  });
+ }catch(e){
+  // Try loading old key
+  try{
+   const d=JSON.parse(localStorage.getItem('smg_data_v4'));
+   if(d?.verses){st.verses=d.verses;st.verses.forEach(v=>{if(v.masteryLevel===undefined)v.masteryLevel=0});save();}
+  }catch(e2){}
+ }
+}
 function save(){localStorage.setItem(SK,JSON.stringify({verses:st.verses}))}
 function toast(m,t='info'){const c=document.getElementById('toastContainer'),el=document.createElement('div');el.className='toast '+t;el.textContent=m;c.appendChild(el);setTimeout(()=>el.remove(),3200)}
 function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function switchTab(t){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
-  document.querySelector(`[data-tab="${t}"]`).classList.add('active');
-  if(t==='library')renderLibrary();
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+ document.getElementById('tab-'+t).classList.add('active');
+ document.querySelector(`[data-tab="${t}"]`).classList.add('active');
+ if(t==='library')renderLibrary();
 }
 function toggleSwitch(el){el.classList.toggle('on')}
 function isOn(id){return document.getElementById(id).classList.contains('on')}
 function updateDiffLabel(){document.getElementById('diffLabel').textContent=document.getElementById('diffSlider').value+'%'}
 function activeText(){return st.current.fullText}
 
-function buildRefCard(ref,version,targetId){
-  document.getElementById(targetId).innerHTML=`<div class="verse-ref-card">
-    <div class="ref-book">📖 ${esc(ref)}</div>
-    <div class="ref-version"><span class="ver-badge">${esc(version)}</span></div>
-  </div>`;
-}
+function getMasteryLabel(level){return MASTERY_LABELS[Math.min(level,10)];}
+function getMasteryDifficulty(level){return Math.min(90, Math.max(10, (level+1)*10));}
 
+function buildRefCard(ref,version,targetId){
+ let masteryHtml='';
+ if(st.current){
+  const uid=st.current.ref+'|'+st.current.version;
+  const vd=st.verses.find(v=>v.uid===uid);
+  if(vd){
+   const ml=vd.masteryLevel||0;
+   const info=getMasteryLabel(ml);
+   masteryHtml=`<div class="mastery-info">
+    <span class="mastery-badge ${info.cls}">${info.icon} ${info.name} (Lv ${ml}/10)</span>
+    <div class="progress-bar" style="margin-top:6px;max-width:200px;margin-left:auto;margin-right:auto">
+     <div class="progress-fill" style="width:${ml*10}%"></div>
+    </div>
+   </div>`;
+  }
+ }
+ document.getElementById(targetId).innerHTML=`<div class="verse-ref-card">
+  <div class="ref-book">📖 ${esc(ref)}</div>
+  <div class="ref-version"><span class="ver-badge">${esc(version)}</span></div>
+  ${masteryHtml}
+ </div>`;
+}
 function buildWords(text){
-  return text.split(/\s+/).filter(w=>w.length>0).map((raw,i)=>{
-    const clean=raw.replace(/^[^a-zA-Z'']+|[^a-zA-Z'']+$/g,'');
-    const prefix=raw.match(/^([^a-zA-Z'']*)/)?.[1]||'';
-    const suffix=raw.match(/([^a-zA-Z'']*)$/)?.[1]||'';
-    return{raw,clean,prefix,suffix,isStop:STOP.has(clean.toLowerCase()),index:i};
-  });
+ return text.split(/ /).filter(w=>w.length>0).map((raw,i)=>{
+  const clean=raw.replace(/^[^a-zA-Z'']+|[^a-zA-Z'']+$/g,'');
+  const prefix=raw.match(/^([^a-zA-Z'']*)/)?.[1]||'';
+  const suffix=raw.match(/([^a-zA-Z'']*)$/)?.[1]||'';
+  return{raw,clean,prefix,suffix,isStop:STOP.has(clean.toLowerCase()),index:i};
+ });
 }
 function shuffle(arr){
-  let a=[...arr];
-  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
-  return a;
+ let a=[...arr];
+ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+ return a;
 }
 
-// ======= FETCHING (Simplified for brevity, assuming standard Bible API) =======
+// ======= FETCHING =======
 async function fetchVerse(){
-  const q=document.getElementById('searchInput').value.trim();
-  if(!q){toast('Enter a scripture reference','error');return}
-  const btn=document.getElementById('fetchBtn');
-  btn.disabled=true;btn.innerHTML='<span class="spin">⏳</span> Searching...';
-  try{
-    const r=await fetch(`https://bible-api.com/${encodeURIComponent(q)}`);
-    const d=await r.json();
-    if(!d.text)throw new Error('Empty');
-    loadVerse(d.reference, d.text.trim().replace(/\n/g,' ').replace(/\s+/g,' '), 'WEB');
-    toast('✅ Loaded!','success');
-  }catch(e){
-    document.getElementById('fallbackBox').style.display='block';
-  }finally{btn.disabled=false;btn.innerHTML='🔍 Search'}
+ const q=document.getElementById('searchInput').value.trim();
+ if(!q){toast('Enter a scripture reference','error');return}
+ const btn=document.getElementById('fetchBtn');
+ btn.disabled=true;btn.innerHTML='<span class="spin">⏳</span> Searching...';
+ try{
+  const r=await fetch(`https://bible-api.com/${encodeURIComponent(q)}`);
+  const d=await r.json();
+  if(!d.text)throw new Error('Empty');
+  loadVerse(d.reference, d.text.trim().replace(/\n/g,' ').replace(/ +/g,' '), 'WEB');
+  toast('✅ Loaded!','success');
+ }catch(e){
+  document.getElementById('fallbackBox').style.display='block';
+  toast('Could not fetch verse','error');
+ }finally{btn.disabled=false;btn.innerHTML='🔍 Search'}
 }
 
 function loadVerse(ref,text,version){
-  st.current={ref,fullText:text,version:version||'KJV'};
-  const uid=ref+'|'+version;
-  let ex=st.verses.find(v=>v.uid===uid);
-  if(!ex){ex={uid,ref,fullText:text,version,overallPct:0,practiceCount:0};st.verses.push(ex);save()}
-  document.getElementById('versePreview').style.display='block';
-  document.getElementById('versePreview').innerHTML=`<div class="verse-preview"><div class="vp-ref">📖 ${esc(ref)}</div><div class="vp-text">"${esc(text)}"</div></div>`;
-  document.getElementById('verseSettings').style.display='block';
-  switchTab('search');
+ st.current={ref,fullText:text,version:version||'KJV'};
+ const uid=ref+'|'+version;
+ let ex=st.verses.find(v=>v.uid===uid);
+ if(!ex){
+  ex={uid,ref,fullText:text,version,overallPct:0,practiceCount:0,masteryLevel:0};
+  st.verses.push(ex);save();
+ }
+ // Ensure masteryLevel exists for older data
+ if(ex.masteryLevel===undefined){ex.masteryLevel=0;save();}
+
+ // If mastery mode is on, set difficulty based on mastery level
+ if(isOn('masteryToggle')){
+  const ml=ex.masteryLevel||0;
+  const masteryDiff=getMasteryDifficulty(ml);
+  document.getElementById('diffSlider').value=masteryDiff;
+  updateDiffLabel();
+  const info=getMasteryLabel(ml);
+  document.getElementById('masteryDiffNote').style.display='block';
+  document.getElementById('masteryDiffNote').textContent=`${info.icon} Mastery Mode: Level ${ml}/10 → Difficulty auto-set to ${masteryDiff}%`;
+ } else {
+  document.getElementById('masteryDiffNote').style.display='none';
+ }
+
+ const ml=ex.masteryLevel||0;
+ const info=getMasteryLabel(ml);
+ const masteryLine=ml>0?`<div class="vp-mastery">${info.icon} Mastery: ${info.name} (Level ${ml}/10) | Practiced ${ex.practiceCount||0}×</div>`
+  :`<div class="vp-mastery">🌱 New verse — start practicing!</div>`;
+
+ document.getElementById('versePreview').style.display='block';
+ document.getElementById('versePreview').innerHTML=`<div class="verse-preview">
+  <div class="vp-ref">📖 ${esc(ref)}</div>
+  <div class="vp-text">${esc(text)}</div>
+  ${masteryLine}
+ </div>`;
+ document.getElementById('verseSettings').style.display='block';
+ document.getElementById('fallbackBox').style.display='none';
+ switchTab('search');
 }
 
 // ======= GAME MANAGER =======
-function startGame(mode) {
-  if(!st.current){toast('Load a verse first','error');return}
-  st.gameMode = mode;
-  st.modeData = {};
-  
-  document.getElementById('practiceEmpty').style.display='none';
-  document.getElementById('practiceArea').style.display='block';
-  buildRefCard(st.current.ref, st.current.version, 'gameRefCard');
-  
-  document.getElementById('gameResult').style.display='none';
-  const c = document.getElementById('gameContainer');
-  c.innerHTML = '';
-  
-  // Cleanup global listeners
-  document.getElementById('hiddenInput').oninput = null;
-  
-  switch(mode) {
-    case 'blanks': initBlanks(c); break;
-    case 'eraser': initEraser(c); break;
-    case 'firstLetter': initFirstLetter(c); break;
-    case 'scramble': initScramble(c); break;
-    case 'typist': initTypist(c); break;
-    case 'choice': initChoice(c); break;
-    case 'recite': initRecite(c); break;
-  }
-  switchTab('practice');
-}
+function startGame(mode){
+ if(!st.current){toast('Load a verse first','error');return}
+ st.gameMode=mode;
+ st.modeData={};
 
-function showResult(pct) {
-  const rb=document.getElementById('gameResult');
-  rb.style.display='block';
-  rb.className='result-box '+(pct===100?'perfect':pct>=70?'good':'poor');
-  rb.innerHTML=`<div class="result-score" style="color:${pct===100?'var(--success)':pct>=70?'var(--yellow)':'var(--danger)'}">${pct}%</div>
-    <div class="result-msg">${pct===100?'🎉 Perfect!':pct>=70?'👏 Good job!':'Keep practicing!'}</div>`;
-  
+ // If mastery mode is on, set difficulty based on mastery level
+ if(isOn('masteryToggle')){
   const uid=st.current.ref+'|'+st.current.version;
   const vd=st.verses.find(v=>v.uid===uid);
-  if(vd) {
-    vd.practiceCount++;
-    if(pct>vd.overallPct) vd.overallPct = pct;
-    save();
+  if(vd){
+   const ml=vd.masteryLevel||0;
+   const masteryDiff=getMasteryDifficulty(ml);
+   document.getElementById('diffSlider').value=masteryDiff;
+   updateDiffLabel();
   }
-  if(pct===100) launchConfetti();
+ }
+
+ document.getElementById('practiceEmpty').style.display='none';
+ document.getElementById('practiceArea').style.display='block';
+ buildRefCard(st.current.ref,st.current.version,'gameRefCard');
+
+ document.getElementById('gameResult').style.display='none';
+ const c=document.getElementById('gameContainer');
+ c.innerHTML='';
+ document.getElementById('hiddenInput').oninput=null;
+
+ switch(mode){
+  case 'blanks': initBlanks(c); break;
+  case 'eraser': initEraser(c); break;
+  case 'firstLetter': initFirstLetter(c); break;
+  case 'scramble': initScramble(c); break;
+  case 'typist': initTypist(c); break;
+  case 'choice': initChoice(c); break;
+  case 'recite': initRecite(c); break;
+ }
+ switchTab('practice');
 }
 
-// ==========================================
-// MODE 1: FILL BLANKS (With Tap-to-Fill)
-// ==========================================
-function initBlanks(c) {
-  const words = buildWords(activeText());
-  const pct = parseInt(document.getElementById('diffSlider').value);
-  const rem = words.filter(w=>w.clean.length>0);
-  const cnt = Math.max(1, Math.round(rem.length*(pct/100)));
-  
-  st.blankIdx = shuffle(rem).slice(0,cnt).map(w=>w.index).sort((a,b)=>a-b);
-  st.selBlank = -1;
-  st.modeData = { words };
+function showResult(pct){
+ const rb=document.getElementById('gameResult');
+ rb.style.display='block';
 
-  c.innerHTML = `
-    <div class="game-stats-row">
-      <div class="game-stat">Blanks: <span>${st.blankIdx.length}</span></div>
-      <div class="game-stat">Filled: <span id="gsFilled">0</span></div>
+ let masteryHtml='';
+ const uid=st.current.ref+'|'+st.current.version;
+ const vd=st.verses.find(v=>v.uid===uid);
+
+ if(vd){
+  vd.practiceCount=(vd.practiceCount||0)+1;
+  if(pct>vd.overallPct) vd.overallPct=pct;
+
+  // ====== MASTERY PROGRESSION ======
+  if(isOn('masteryToggle')){
+   const oldLevel=vd.masteryLevel||0;
+   let newLevel=oldLevel;
+   let levelMsg='';
+
+   if(pct===100 && oldLevel<10){
+    newLevel=oldLevel+1;
+    vd.masteryLevel=newLevel;
+    const newDiff=getMasteryDifficulty(newLevel);
+    document.getElementById('diffSlider').value=newDiff;
+    updateDiffLabel();
+    const info=getMasteryLabel(newLevel);
+    levelMsg=`<div style="margin-top:6px;color:var(--acc);font-weight:700">⬆️ Level Up! → ${info.icon} ${info.name} (Lv ${newLevel}/10)</div>`;
+    toast(`⬆️ Mastery Level Up! Now ${info.name} (Level ${newLevel}/10)`,'success');
+   } else if(pct>=80){
+    const info=getMasteryLabel(oldLevel);
+    levelMsg=`<div style="margin-top:6px;color:var(--txt2);font-size:.82rem">${info.icon} Level ${oldLevel}/10 — Get 100% to level up!</div>`;
+   } else {
+    const info=getMasteryLabel(oldLevel);
+    levelMsg=`<div style="margin-top:6px;color:var(--txt3);font-size:.82rem">${info.icon} Level ${oldLevel}/10 — Keep practicing!</div>`;
+   }
+
+   masteryHtml=`
+    ${levelMsg}
+    <div class="progress-bar" style="margin-top:6px;max-width:250px;margin-left:auto;margin-right:auto">
+     <div class="progress-fill" style="width:${(vd.masteryLevel||0)*10}%"></div>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="gameProg" style="width:0%"></div></div>
-    <div id="verseDisplay" class="verse-display"></div>
-    <div id="wordBank" class="word-bank"></div>
-  `;
-  
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-pri btn-sm" onclick="checkBlanks()">✅ Check</button>
-    <button class="btn btn-ghost btn-sm" onclick="startGame('blanks')">🔄 Reset</button>
-  `;
+    <div style="font-size:.7rem;color:var(--txt3);margin-top:4px">Mastery: ${(vd.masteryLevel||0)*10}%</div>
+   `;
+  }
+  save();
+ }
 
-  renderBlanks();
+ rb.className='result-box '+(pct===100?'perfect':pct>=70?'good':'poor');
+ rb.innerHTML=`
+  <div class="result-score" style="color:${pct===100?'var(--success)':pct>=70?'var(--yellow)':'var(--danger)'}">${pct}%</div>
+  <div class="result-msg">${pct===100?'🎉 Perfect!':pct>=70?'👍 Good job!':'Keep practicing!'}</div>
+  ${masteryHtml}
+  <div class="btn-row" style="margin-top:12px;justify-content:center">
+   <button class="btn btn-pri btn-sm" onclick="startGame('${st.gameMode}')">🔄 ${pct===100&&isOn('masteryToggle')?'Next Level':'Retry'}</button>
+   <button class="btn btn-ghost btn-sm" onclick="switchTab('search')">📝 Settings</button>
+  </div>
+ `;
+
+ if(pct===100) launchConfetti();
 }
 
-function renderBlanks() {
-  const hints = isOn('hintToggle');
-  document.getElementById('verseDisplay').innerHTML = st.modeData.words.map((w,i)=>{
-    if(st.blankIdx.includes(i)){
-      const h=hints&&w.clean.length?`<span class="hint-letter">${w.clean[0]}</span>`:'';
-      return`${w.prefix}<span class="verse-blank" data-idx="${i}" data-answer="${esc(w.clean)}" onclick="selBlank(${i})">${h}</span>${w.suffix}`;
-    }
-    return`<span class="verse-word">${esc(w.raw)}</span>`;
-  }).join(' ');
+// ==========================================
+// MODE 1: FILL BLANKS
+// ==========================================
+function initBlanks(c){
+ const words=buildWords(activeText());
+ const pct=parseInt(document.getElementById('diffSlider').value);
+ const rem=words.filter(w=>w.clean.length>0);
+ const cnt=Math.max(1,Math.round(rem.length*(pct/100)));
 
-  const bw = shuffle(st.blankIdx.map(i=>st.modeData.words[i].clean).filter(w=>w.length));
-  const wb = document.getElementById('wordBank');
-  wb.innerHTML = '<div class="word-bank-label">👆 Tap or Drag words to blanks</div>' + 
-                 bw.map(w=>`<span class="wb-word" data-word="${esc(w)}">${esc(w)}</span>`).join('');
-  
-  // Attach Drag & Tap listeners
-  document.querySelectorAll('.wb-word').forEach(el=>{
-    el.addEventListener('touchstart', e=>handleDragStart(el,e), {passive:false});
-    el.addEventListener('mousedown', e=>handleDragStart(el,e));
-  });
+ st.blankIdx=shuffle(rem).slice(0,cnt).map(w=>w.index).sort((a,b)=>a-b);
+ st.selBlank=-1;
+ st.modeData={words,bankMap:{}};
+
+ c.innerHTML=`
+  <div class="game-stats-row">
+   <div class="game-stat">Blanks: <span>${st.blankIdx.length}</span></div>
+   <div class="game-stat">Filled: <span id="gsFilled">0</span></div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="gameProg" style="width:0%"></div></div>
+  <div id="verseDisplay" class="verse-display"></div>
+  <div id="wordBank" class="word-bank"></div>
+ `;
+
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-pri btn-sm" onclick="checkBlanks()">✅ Check</button>
+  <button class="btn btn-ghost btn-sm" onclick="startGame('blanks')">🔄 Reset</button>
+ `;
+ renderBlanks();
 }
 
-function selBlank(idx) {
-  st.selBlank = idx;
-  document.querySelectorAll('.verse-blank').forEach(b=>{
-    b.style.boxShadow = parseInt(b.dataset.idx) === idx ? '0 0 0 2px var(--acc)' : '';
-  });
-  // If blank is filled, tapping it clears it
-  let bl = document.querySelector(`.verse-blank[data-idx="${idx}"]`);
-  if(bl.classList.contains('filled') && !bl.classList.contains('correct') && !bl.classList.contains('wrong')){
-    const ow = bl.dataset.userAnswer;
-    const oel = [...document.querySelectorAll('.wb-word.used')].find(w=>w.dataset.word===ow);
-    if(oel) oel.classList.remove('used');
-    bl.textContent = isOn('hintToggle') ? st.modeData.words[idx].clean[0] : '';
-    bl.classList.remove('filled');
-    delete bl.dataset.userAnswer;
-    updBlanksFilled();
+function renderBlanks(){
+ const hints=isOn('hintToggle');
+ document.getElementById('verseDisplay').innerHTML=st.modeData.words.map((w,i)=>{
+  if(st.blankIdx.includes(i)){
+   const h=hints&&w.clean.length?`<span class="hint-letter">${w.clean[0]}</span>`:'';
+   return`${w.prefix}<span class="verse-blank" data-idx="${i}" data-answer="${esc(w.clean)}" onclick="selBlank(${i})">${h}</span>${w.suffix}`;
   }
+  return`<span class="verse-word">${esc(w.raw)}</span>`;
+ }).join(' ');
+
+ // Build word bank with unique IDs to handle duplicates
+ const bankItems=st.blankIdx.map((blankWordIdx,bankPos)=>({
+  word:st.modeData.words[blankWordIdx].clean,
+  bankId:bankPos
+ })).filter(item=>item.word.length>0);
+ const shuffledBank=shuffle(bankItems);
+
+ const wb=document.getElementById('wordBank');
+ wb.innerHTML='<div class="word-bank-label">Tap a word, then tap a blank</div>'+
+  shuffledBank.map(item=>`<span class="wb-word" data-word="${esc(item.word)}" data-bank-id="${item.bankId}">${esc(item.word)}</span>`).join('');
+
+ document.querySelectorAll('.wb-word').forEach(el=>{
+  el.addEventListener('touchstart',e=>handleDragStart(el,e),{passive:false});
+  el.addEventListener('mousedown',e=>handleDragStart(el,e));
+ });
 }
 
-// Drag logic adapted to allow Tapping
-function handleDragStart(el,e){
-  if(el.classList.contains('used')) return;
-  const pos = getEventPos(e);
-  dragState = { active:true, el:el, word:el.dataset.word, srcEl:el, dragged:false, startX:pos.x, startY:pos.y };
-  
-  document.addEventListener('touchmove',handleDragMove,{passive:false});
-  document.addEventListener('mousemove',handleDragMove);
-  document.addEventListener('touchend',handleDragEnd);
-  document.addEventListener('mouseup',handleDragEnd);
-}
-function handleDragMove(e){
-  if(!dragState.active) return;
-  const pos = getEventPos(e);
-  if(Math.abs(pos.x - dragState.startX) > 5 || Math.abs(pos.y - dragState.startY) > 5) {
-    dragState.dragged = true;
-    if(!dragState.clone) { // Create clone only when actually dragging
-      e.preventDefault();
-      dragState.srcEl.classList.add('dragging');
-      dragState.clone = document.createElement('div');
-      dragState.clone.className = 'drag-clone';
-      dragState.clone.textContent = dragState.word;
-      document.body.appendChild(dragState.clone);
-      document.querySelectorAll('.verse-blank:not(.correct)').forEach(b=>b.classList.add('drop-hover'));
-    }
-    dragState.clone.style.left = (pos.x-30)+'px';
-    dragState.clone.style.top = (pos.y-20)+'px';
-    
-    dragState.clone.style.display='none';
-    const target = document.elementFromPoint(pos.x,pos.y);
-    dragState.clone.style.display='';
-    
-    document.querySelectorAll('.verse-blank').forEach(b=>{ b.classList.remove('drop-hover'); if(!b.classList.contains('correct'))b.style.transform=''; });
-    if(target && target.classList.contains('verse-blank') && !target.classList.contains('correct')){
-      target.classList.add('drop-hover');
-      target.style.transform='scale(1.1)';
-      dragState.dropTarget = target;
-    } else {
-      dragState.dropTarget = null;
-      document.querySelectorAll('.verse-blank:not(.correct):not(.filled)').forEach(b=>b.classList.add('drop-hover'));
-    }
+function selBlank(idx){
+ st.selBlank=idx;
+ document.querySelectorAll('.verse-blank').forEach(b=>{
+  b.style.boxShadow=parseInt(b.dataset.idx)===idx?'0 0 0 2px var(--acc)':'';
+ });
+ let bl=document.querySelector(`.verse-blank[data-idx="${idx}"]`);
+ if(bl.classList.contains('filled')&&!bl.classList.contains('correct')&&!bl.classList.contains('wrong')){
+  const bankId=bl.dataset.bankId;
+  if(bankId!==undefined){
+   const oel=document.querySelector(`.wb-word[data-bank-id="${bankId}"]`);
+   if(oel) oel.classList.remove('used');
   }
-}
-function handleDragEnd(e){
-  if(!dragState.active) return;
-  dragState.active = false;
-  document.removeEventListener('touchmove',handleDragMove);
-  document.removeEventListener('mousemove',handleDragMove);
-  document.removeEventListener('touchend',handleDragEnd);
-  document.removeEventListener('mouseup',handleDragEnd);
-
-  // If it was just a TAP
-  if(!dragState.dragged) {
-    handleBankTap(dragState.srcEl);
-    return;
-  }
-
-  // Handle DROP
-  document.querySelectorAll('.verse-blank').forEach(b=>{ b.classList.remove('drop-hover'); b.style.transform=''; });
-  if(dragState.dropTarget && !dragState.dropTarget.classList.contains('correct')) {
-    fillBlankEl(dragState.dropTarget, dragState.word, dragState.srcEl);
-  } else {
-    dragState.srcEl.classList.remove('dragging');
-  }
-  if(dragState.clone) dragState.clone.remove();
-}
-
-function handleBankTap(bankEl) {
-  // Find target blank
-  let targetIdx = st.selBlank;
-  if(targetIdx === -1) {
-    targetIdx = st.blankIdx.find(i => !document.querySelector(`.verse-blank[data-idx="${i}"]`).classList.contains('filled'));
-  }
-  if(targetIdx !== undefined && targetIdx !== -1) {
-    let bl = document.querySelector(`.verse-blank[data-idx="${targetIdx}"]`);
-    if(!bl.classList.contains('correct')) {
-      fillBlankEl(bl, bankEl.dataset.word, bankEl);
-      st.selBlank = -1; // reset selection after fill
-      document.querySelectorAll('.verse-blank').forEach(b=>b.style.boxShadow=''); // clear visual selection
-    }
-  }
-}
-
-function fillBlankEl(bl, word, srcEl) {
-  if(bl.classList.contains('filled')){ // replace existing
-    const ow = bl.dataset.userAnswer;
-    const oel = [...document.querySelectorAll('.wb-word.used')].find(w=>w.dataset.word===ow);
-    if(oel) oel.classList.remove('used');
-  }
-  bl.textContent = word;
-  bl.classList.add('filled');
-  bl.dataset.userAnswer = word;
-  srcEl.classList.add('used');
-  srcEl.classList.remove('dragging');
-  bl.style.animation='none'; bl.offsetHeight; bl.style.animation='fillPop .3s ease';
+  bl.textContent=isOn('hintToggle')&&st.modeData.words[idx].clean.length?st.modeData.words[idx].clean[0]:'';
+  bl.classList.remove('filled');
+  delete bl.dataset.userAnswer;
+  delete bl.dataset.bankId;
   updBlanksFilled();
+ }
+}
+
+function handleDragStart(el,e){
+ if(el.classList.contains('used'))return;
+ const pos=getEventPos(e);
+ dragState={active:true,el:el,word:el.dataset.word,srcEl:el,dragged:false,startX:pos.x,startY:pos.y,bankId:el.dataset.bankId};
+ document.addEventListener('touchmove',handleDragMove,{passive:false});
+ document.addEventListener('mousemove',handleDragMove);
+ document.addEventListener('touchend',handleDragEnd);
+ document.addEventListener('mouseup',handleDragEnd);
+}
+
+function handleDragMove(e){
+ if(!dragState.active)return;
+ const pos=getEventPos(e);
+ if(Math.abs(pos.x-dragState.startX)>5||Math.abs(pos.y-dragState.startY)>5){
+  dragState.dragged=true;
+  if(!dragState.clone){
+   e.preventDefault();
+   dragState.srcEl.classList.add('dragging');
+   dragState.clone=document.createElement('div');
+   dragState.clone.className='drag-clone';
+   dragState.clone.textContent=dragState.word;
+   document.body.appendChild(dragState.clone);
+   document.querySelectorAll('.verse-blank:not(.correct)').forEach(b=>b.classList.add('drop-hover'));
+  }
+  dragState.clone.style.left=(pos.x-30)+'px';
+  dragState.clone.style.top=(pos.y-20)+'px';
+  dragState.clone.style.display='none';
+  const target=document.elementFromPoint(pos.x,pos.y);
+  dragState.clone.style.display='';
+  document.querySelectorAll('.verse-blank').forEach(b=>{
+   b.classList.remove('drop-hover');
+   if(!b.classList.contains('correct'))b.style.transform='';
+  });
+  if(target&&target.classList.contains('verse-blank')&&!target.classList.contains('correct')){
+   target.classList.add('drop-hover');target.style.transform='scale(1.1)';
+   dragState.dropTarget=target;
+  }else{
+   dragState.dropTarget=null;
+   document.querySelectorAll('.verse-blank:not(.correct):not(.filled)').forEach(b=>b.classList.add('drop-hover'));
+  }
+ }
+}
+
+function handleDragEnd(e){
+ if(!dragState.active)return;
+ dragState.active=false;
+ document.removeEventListener('touchmove',handleDragMove);
+ document.removeEventListener('mousemove',handleDragMove);
+ document.removeEventListener('touchend',handleDragEnd);
+ document.removeEventListener('mouseup',handleDragEnd);
+ if(!dragState.dragged){
+  handleBankTap(dragState.srcEl);return;
+ }
+ document.querySelectorAll('.verse-blank').forEach(b=>{b.classList.remove('drop-hover');b.style.transform='';});
+ if(dragState.dropTarget&&!dragState.dropTarget.classList.contains('correct')){
+  fillBlankEl(dragState.dropTarget,dragState.word,dragState.srcEl);
+ }else{
+  dragState.srcEl.classList.remove('dragging');
+ }
+ if(dragState.clone)dragState.clone.remove();
+}
+
+function handleBankTap(bankEl){
+ let targetIdx=st.selBlank;
+ if(targetIdx===-1){
+  targetIdx=st.blankIdx.find(i=>{
+   const bl=document.querySelector(`.verse-blank[data-idx="${i}"]`);
+   return bl&&!bl.classList.contains('filled');
+  });
+ }
+ if(targetIdx!==undefined&&targetIdx!==-1){
+  let bl=document.querySelector(`.verse-blank[data-idx="${targetIdx}"]`);
+  if(bl&&!bl.classList.contains('correct')){
+   fillBlankEl(bl,bankEl.dataset.word,bankEl);
+   st.selBlank=-1;
+   document.querySelectorAll('.verse-blank').forEach(b=>b.style.boxShadow='');
+  }
+ }
+}
+
+function fillBlankEl(bl,word,srcEl){
+ if(bl.classList.contains('filled')){
+  const oldBankId=bl.dataset.bankId;
+  if(oldBankId!==undefined){
+   const oel=document.querySelector(`.wb-word[data-bank-id="${oldBankId}"]`);
+   if(oel)oel.classList.remove('used');
+  }
+ }
+ bl.textContent=word;
+ bl.classList.add('filled');
+ bl.dataset.userAnswer=word;
+ bl.dataset.bankId=srcEl.dataset.bankId;
+ srcEl.classList.add('used');
+ srcEl.classList.remove('dragging');
+ bl.style.animation='none';bl.offsetHeight;bl.style.animation='fillPop .3s ease';
+ updBlanksFilled();
 }
 
 function getEventPos(e){
-  if(e.touches&&e.touches.length) return{x:e.touches[0].clientX,y:e.touches[0].clientY};
-  if(e.changedTouches&&e.changedTouches.length) return{x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};
-  return{x:e.clientX,y:e.clientY};
+ if(e.touches&&e.touches.length)return{x:e.touches[0].clientX,y:e.touches[0].clientY};
+ if(e.changedTouches&&e.changedTouches.length)return{x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};
+ return{x:e.clientX,y:e.clientY};
 }
 
 function updBlanksFilled(){
-  const f = document.querySelectorAll('.verse-blank.filled').length;
-  document.getElementById('gsFilled').textContent = f;
-  document.getElementById('gameProg').style.width = Math.round(f/st.blankIdx.length*100)+'%';
+ const f=document.querySelectorAll('.verse-blank.filled').length;
+ const el=document.getElementById('gsFilled');
+ if(el)el.textContent=f;
+ const prog=document.getElementById('gameProg');
+ if(prog)prog.style.width=Math.round(f/st.blankIdx.length*100)+'%';
 }
 
-function checkBlanks() {
-  const blanks = document.querySelectorAll('.verse-blank');
-  let ok=0;
-  blanks.forEach(b=>{
-    const ans = b.dataset.answer.toLowerCase();
-    const usr = (b.dataset.userAnswer||'').toLowerCase();
-    if(ans===usr) { b.classList.add('correct'); ok++; }
-    else { b.classList.add('wrong'); }
-  });
-  showResult(Math.round(ok/blanks.length*100));
+function checkBlanks(){
+ const blanks=document.querySelectorAll('.verse-blank');
+ let ok=0;
+ blanks.forEach(b=>{
+  const ans=b.dataset.answer.toLowerCase();
+  const usr=(b.dataset.userAnswer||'').toLowerCase();
+  if(ans===usr){b.classList.add('correct');ok++;}
+  else{b.classList.add('wrong');}
+ });
+ showResult(Math.round(ok/blanks.length*100));
 }
 
 // ==========================================
 // MODE 2: PROGRESSIVE ERASER
 // ==========================================
-function initEraser(c) {
-  const words = buildWords(activeText());
-  st.modeData = { words, visible: words.map(()=>true), step:0 };
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Read it aloud. Then click "Fade" to hide words.
-    </div>
-    <div id="eraserDisplay" class="verse-display"></div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-warn btn-sm" onclick="fadeEraser()">🧽 Fade 15%</button>
-    <button class="btn btn-pri btn-sm" onclick="showResult(100)">✅ I Memorized It!</button>
-  `;
-  renderEraser();
+function initEraser(c){
+ const words=buildWords(activeText());
+ st.modeData={words,visible:words.map(()=>true),step:0,knowItMode:false};
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Read it aloud. Then click "Fade" to hide words progressively.
+  </div>
+  <div id="eraserDisplay" class="verse-display"></div>
+  <div id="eraserKnowItArea" style="display:none"></div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-warn btn-sm" onclick="fadeEraser()">🌫️ Fade</button>
+  <button class="btn btn-pri btn-sm" onclick="eraserKnowIt()">💯 I Know It!</button>
+ `;
+ renderEraser();
 }
-function renderEraser() {
-  document.getElementById('eraserDisplay').innerHTML = st.modeData.words.map((w,i)=>{
-    if(st.modeData.visible[i]) return `${w.prefix}<span class="eraser-word">${esc(w.clean)}</span>${w.suffix}`;
-    else return `${w.prefix}<span class="eraser-word hidden">___</span>${w.suffix}`;
-  }).join(' ');
+
+function renderEraser(){
+ document.getElementById('eraserDisplay').innerHTML=st.modeData.words.map((w,i)=>{
+  if(st.modeData.visible[i])return`${w.prefix}<span class="eraser-word">${esc(w.clean)}</span>${w.suffix}`;
+  else return`${w.prefix}<span class="eraser-word hidden">___</span>${w.suffix}`;
+ }).join(' ');
 }
-function fadeEraser() {
-  let vis = st.modeData.visible.map((v,i)=>v?i:-1).filter(i=>i!==-1);
-  let toFade = Math.max(1, Math.floor(st.modeData.words.length * 0.15));
-  for(let i=0; i<toFade && vis.length>0; i++) {
-    let idx = vis.splice(Math.floor(Math.random()*vis.length), 1)[0];
-    st.modeData.visible[idx] = false;
-  }
-  renderEraser();
-  if(st.modeData.visible.filter(v=>v).length === 0) {
-    document.querySelector('#gameControls .btn-warn').disabled = true;
-  }
+
+function fadeEraser(){
+ let vis=st.modeData.visible.map((v,i)=>v&&st.modeData.words[i].clean.length>0?i:-1).filter(i=>i!==-1);
+ let toFade=Math.max(1,Math.floor(st.modeData.words.length*0.15));
+ for(let i=0;i<toFade&&vis.length>0;i++){
+  let idx=vis.splice(Math.floor(Math.random()*vis.length),1)[0];
+  st.modeData.visible[idx]=false;
+ }
+ renderEraser();
+ if(st.modeData.visible.filter((v,i)=>v&&st.modeData.words[i].clean.length>0).length===0){
+  document.querySelector('#gameControls .btn-warn').disabled=true;
+  toast('All words hidden! Try "I Know It!"','info');
+ }
+}
+
+function eraserKnowIt(){
+ // Hide ALL remaining words
+ st.modeData.visible=st.modeData.words.map(()=>false);
+ renderEraser();
+ st.modeData.knowItMode=true;
+
+ document.getElementById('eraserKnowItArea').style.display='block';
+ document.getElementById('eraserKnowItArea').innerHTML=`
+  <div style="margin-top:12px">
+   <p style="color:var(--txt2);font-size:.85rem;margin-bottom:8px;">Type the verse from memory:</p>
+   <textarea id="eraserInput" class="eraser-textarea" placeholder="Type the verse here..."></textarea>
+  </div>
+ `;
+
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-pri btn-sm" onclick="checkEraserKnowIt()">✅ Check</button>
+  <button class="btn btn-ghost btn-sm" onclick="startGame('eraser')">🔄 Restart</button>
+ `;
+}
+
+function checkEraserKnowIt(){
+ const input=(document.getElementById('eraserInput')||{}).value||'';
+ if(!input.trim()){toast('Type the verse first!','error');return;}
+
+ const targetWords=activeText().toLowerCase().replace(/[^a-z' ]/g,'').split(/ +/).filter(Boolean);
+ const inputWords=input.toLowerCase().replace(/[^a-z' ]/g,'').split(/ +/).filter(Boolean);
+
+ let ok=0;
+ for(let i=0;i<targetWords.length;i++){
+  if(i<inputWords.length&&targetWords[i]===inputWords[i])ok++;
+ }
+ // Show the correct text for comparison
+ st.modeData.visible=st.modeData.words.map(()=>true);
+ renderEraser();
+ showResult(Math.round(ok/targetWords.length*100));
 }
 
 // ==========================================
 // MODE 3: FIRST LETTER
 // ==========================================
-function initFirstLetter(c) {
-  const words = buildWords(activeText());
-  // only care about words that have actual letters
-  const validWords = words.filter(w=>w.clean.length>0);
-  st.modeData = { words, validWords, currIdx: 0, errors:0 };
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Type the first letter of each word to reveal it.
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="flProg" style="width:0%"></div></div>
-    <div id="flDisplay" class="verse-display" style="font-family:monospace; font-size:1.1rem;"></div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-ghost btn-sm" onclick="startGame('firstLetter')">🔄 Restart</button>
-  `;
-  
-  const inp = document.getElementById('hiddenInput');
-  inp.value = '';
-  inp.oninput = handleFLInput;
-  inp.focus();
-  
-  // Click to focus if lost
-  document.getElementById('flDisplay').onclick = () => inp.focus();
+function initFirstLetter(c){
+ const words=buildWords(activeText());
+ const validWords=words.filter(w=>w.clean.length>0);
+ st.modeData={words,validWords,currIdx:0,errors:0};
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Type the first letter of each highlighted word.
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="flProg" style="width:0%"></div></div>
+  <div id="flDisplay" class="verse-display" style="font-family:monospace;font-size:1.1rem;cursor:pointer"></div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-ghost btn-sm" onclick="startGame('firstLetter')">🔄 Restart</button>
+ `;
+ const inp=document.getElementById('hiddenInput');
+ inp.value='';
+ inp.oninput=handleFLInput;
+ inp.focus();
+ document.getElementById('flDisplay').onclick=()=>inp.focus();
+ renderFL();
+}
 
+function renderFL(){
+ document.getElementById('flDisplay').innerHTML=st.modeData.words.map((w)=>{
+  if(w.clean.length===0)return w.raw;
+  const vIdx=st.modeData.validWords.findIndex(vw=>vw.index===w.index);
+  if(vIdx<st.modeData.currIdx){
+   return`${w.prefix}<span class="fl-word done">${esc(w.clean)}</span>${w.suffix}`;
+  }else if(vIdx===st.modeData.currIdx){
+   // FIX: was showing extra underscore
+   return`${w.prefix}<span class="fl-word active">${esc(w.clean[0])}${'_'.repeat(Math.max(0,w.clean.length-1))}</span>${w.suffix}`;
+  }else{
+   return`${w.prefix}<span class="fl-word">${esc(w.clean[0])}${'_'.repeat(Math.max(0,w.clean.length-1))}</span>${w.suffix}`;
+  }
+ }).join(' ');
+
+ const pct=Math.round(st.modeData.currIdx/st.modeData.validWords.length*100);
+ document.getElementById('flProg').style.width=pct+'%';
+
+ if(st.modeData.currIdx>=st.modeData.validWords.length){
+  let finalPct=Math.max(0,100-Math.round((st.modeData.errors/st.modeData.validWords.length)*100));
+  showResult(finalPct);
+ }
+}
+
+function handleFLInput(e){
+ const inp=e.target;
+ const char=inp.value.slice(-1).toLowerCase();
+ inp.value='';
+ if(st.modeData.currIdx>=st.modeData.validWords.length)return;
+ const targetWord=st.modeData.validWords[st.modeData.currIdx].clean;
+ if(char===targetWord[0].toLowerCase()){
+  st.modeData.currIdx++;
   renderFL();
-}
-function renderFL() {
-  document.getElementById('flDisplay').innerHTML = st.modeData.words.map((w)=>{
-    if(w.clean.length===0) return w.raw; // pure punctuation
-    
-    // find index in validWords
-    const vIdx = st.modeData.validWords.findIndex(vw => vw.index === w.index);
-    if(vIdx < st.modeData.currIdx) {
-      return `${w.prefix}<span class="fl-word done">${esc(w.clean)}</span>${w.suffix}`;
-    } else if(vIdx === st.modeData.currIdx) {
-      return `${w.prefix}<span class="fl-word active">${esc(w.clean[0])}_${'_'.repeat(w.clean.length-1)}</span>${w.suffix}`;
-    } else {
-      return `${w.prefix}<span class="fl-word">${esc(w.clean[0])}_${'_'.repeat(w.clean.length-1)}</span>${w.suffix}`;
-    }
-  }).join(' ');
-  
-  const pct = Math.round(st.modeData.currIdx / st.modeData.validWords.length * 100);
-  document.getElementById('flProg').style.width = pct + '%';
-  
-  if(st.modeData.currIdx >= st.modeData.validWords.length) {
-    let finalPct = Math.max(0, 100 - Math.round((st.modeData.errors / st.modeData.validWords.length)*100));
-    showResult(finalPct);
-  }
-}
-function handleFLInput(e) {
-  const inp = e.target;
-  const char = inp.value.slice(-1).toLowerCase(); // get last typed char
-  inp.value = ''; // clear
-  
-  if(st.modeData.currIdx >= st.modeData.validWords.length) return;
-  
-  const targetWord = st.modeData.validWords[st.modeData.currIdx].clean;
-  if(char === targetWord[0].toLowerCase()) {
-    st.modeData.currIdx++;
-    renderFL();
-  } else if(char.match(/[a-z]/)) {
-    st.modeData.errors++;
-    // Flash screen red briefly
-    const d = document.getElementById('flDisplay');
-    d.style.background = 'rgba(214,48,49,0.2)';
-    setTimeout(()=>d.style.background='none', 150);
-  }
+ }else if(char.match(/[a-z]/)){
+  st.modeData.errors++;
+  const d=document.getElementById('flDisplay');
+  d.style.background='rgba(214,48,49,0.2)';
+  setTimeout(()=>d.style.background='none',150);
+ }
 }
 
 // ==========================================
 // MODE 4: SCRAMBLE
 // ==========================================
-function initScramble(c) {
-  let chunks = activeText().split(/(?<=[.,:;?!])\s+/).filter(x=>x.trim());
-  if(chunks.length < 3) chunks = activeText().split(/\s+/).filter(x=>x.trim()); // fallback to words
-  
-  st.modeData = { 
-    source: shuffle(chunks.map((t,i)=>({t, id:i}))), 
-    target: [], 
-    correctOrder: chunks.map((t,i)=>({t, id:i})) 
-  };
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Tap phrases to build the verse in order.
-    </div>
-    <div id="scrambleTarget" class="scramble-zone target"></div>
-    <div id="scrambleSource" class="scramble-zone"></div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-pri btn-sm" onclick="checkScramble()">✅ Check</button>
-  `;
-  renderScramble();
+function initScramble(c){
+ let chunks=activeText().split(/(?<=[.,:;?!]) /).filter(x=>x.trim());
+ if(chunks.length<3)chunks=activeText().split(/ /).filter(x=>x.trim());
+ st.modeData={
+  source:shuffle(chunks.map((t,i)=>({t,id:i}))),
+  target:[],
+  correctOrder:chunks.map((t,i)=>({t,id:i}))
+ };
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Tap phrases to build the verse in order.
+  </div>
+  <div style="font-size:.75rem;color:var(--txt3);margin-bottom:4px;font-weight:600">YOUR ANSWER:</div>
+  <div id="scrambleTarget" class="scramble-zone target"></div>
+  <div style="font-size:.75rem;color:var(--txt3);margin-bottom:4px;font-weight:600">AVAILABLE PIECES:</div>
+  <div id="scrambleSource" class="scramble-zone"></div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-pri btn-sm" onclick="checkScramble()">✅ Check Order</button>
+ `;
+ renderScramble();
 }
-function renderScramble() {
-  document.getElementById('scrambleSource').innerHTML = st.modeData.source.map(c=>
-    `<div class="scramble-chip" onclick="moveScramble(${c.id}, 'source')">${esc(c.t)}</div>`
-  ).join('');
-  document.getElementById('scrambleTarget').innerHTML = st.modeData.target.map(c=>
-    `<div class="scramble-chip" onclick="moveScramble(${c.id}, 'target')">${esc(c.t)}</div>`
-  ).join('');
+
+function renderScramble(){
+ document.getElementById('scrambleSource').innerHTML=st.modeData.source.map(c=>
+  `<div class="scramble-chip" onclick="moveScramble(${c.id},'source')">${esc(c.t)}</div>`
+ ).join('');
+ document.getElementById('scrambleTarget').innerHTML=st.modeData.target.length===0?
+  '<div style="color:var(--txt3);font-size:.8rem;padding:20px;text-align:center">Tap pieces below to place them here</div>':
+  st.modeData.target.map(c=>
+  `<div class="scramble-chip" onclick="moveScramble(${c.id},'target')">${esc(c.t)}</div>`
+ ).join('');
 }
-function moveScramble(id, from) {
-  if(from === 'source') {
-    const idx = st.modeData.source.findIndex(c=>c.id===id);
-    st.modeData.target.push(st.modeData.source.splice(idx,1)[0]);
-  } else {
-    const idx = st.modeData.target.findIndex(c=>c.id===id);
-    st.modeData.source.push(st.modeData.target.splice(idx,1)[0]);
-  }
-  renderScramble();
+
+function moveScramble(id,from){
+ if(from==='source'){
+  const idx=st.modeData.source.findIndex(c=>c.id===id);
+  st.modeData.target.push(st.modeData.source.splice(idx,1)[0]);
+ }else{
+  const idx=st.modeData.target.findIndex(c=>c.id===id);
+  st.modeData.source.push(st.modeData.target.splice(idx,1)[0]);
+ }
+ renderScramble();
 }
-function checkScramble() {
-  if(st.modeData.target.length !== st.modeData.correctOrder.length) {
-    toast('Place all chunks first!', 'error'); return;
-  }
-  let ok = 0;
-  st.modeData.target.forEach((c, i) => {
-    if(c.id === st.modeData.correctOrder[i].id) ok++;
-  });
-  showResult(Math.round(ok / st.modeData.correctOrder.length * 100));
+
+function checkScramble(){
+ if(st.modeData.target.length!==st.modeData.correctOrder.length){
+  toast('Place all chunks first!','error');return;
+ }
+ let ok=0;
+ st.modeData.target.forEach((c,i)=>{
+  if(c.id===st.modeData.correctOrder[i].id)ok++;
+ });
+ showResult(Math.round(ok/st.modeData.correctOrder.length*100));
 }
 
 // ==========================================
 // MODE 5: SPEED TYPIST
 // ==========================================
-function initTypist(c) {
-  const text = activeText().replace(/\s+/g, ' '); // normalize spaces
-  st.modeData = { text, typed: '', errors: 0, startTime: 0, done: false };
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Type the verse as fast as you can.
-    </div>
-    <div style="text-align:center; font-weight:bold; color:var(--acc); font-size:1.2rem; display:none;" id="wpmDisplay"></div>
-    <div class="typist-container">
-      <div class="typist-bg" id="typistBg"></div>
-      <div class="typist-fg" id="typistFg"></div>
-    </div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-ghost btn-sm" onclick="startGame('typist')">🔄 Restart</button>
-  `;
-  
-  const inp = document.getElementById('hiddenInput');
-  inp.value = '';
-  inp.oninput = handleTypistInput;
-  inp.focus();
-  document.querySelector('.typist-container').onclick = () => inp.focus();
+function initTypist(c){
+ const text=activeText().replace(/ +/g,' ');
+ st.modeData={text,typed:'',errors:0,startTime:0,done:false};
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Type the verse as fast as you can. Click the text area to start.
+  </div>
+  <div style="text-align:center;font-weight:bold;color:var(--acc);font-size:1.2rem;display:none;" id="wpmDisplay"></div>
+  <div class="typist-container" style="cursor:pointer">
+   <div class="typist-bg" id="typistBg"></div>
+   <div class="typist-fg" id="typistFg"></div>
+  </div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-ghost btn-sm" onclick="startGame('typist')">🔄 Restart</button>
+ `;
+ const inp=document.getElementById('hiddenInput');
+ inp.value='';
+ inp.oninput=handleTypistInput;
+ inp.focus();
+ document.querySelector('.typist-container').onclick=()=>inp.focus();
+ renderTypist();
+}
 
-  renderTypist();
+function renderTypist(){
+ const md=st.modeData;
+ const bg=document.getElementById('typistBg');
+ const fg=document.getElementById('typistFg');
+ if(!bg||!fg)return;
+ let typedHtml='';
+ for(let i=0;i<md.typed.length;i++){
+  if(md.typed[i]===md.text[i]){typedHtml+=esc(md.text[i]);}
+  else{typedHtml+=`<span class="typist-error">${esc(md.text[i])}</span>`;}
+ }
+ fg.innerHTML=typedHtml+(!md.done?'<span class="typist-cursor"></span>':'');
+ bg.innerHTML='<span style="opacity:0">'+esc(md.text.substring(0,md.typed.length))+'</span>'+esc(md.text.substring(md.typed.length));
 }
-function renderTypist() {
-  const md = st.modeData;
-  const bg = document.getElementById('typistBg');
-  const fg = document.getElementById('typistFg');
-  
-  let typedHtml = '';
-  for(let i=0; i<md.typed.length; i++) {
-    if(md.typed[i] === md.text[i]) {
-      typedHtml += esc(md.text[i]);
-    } else {
-      typedHtml += `<span class="typist-error">${esc(md.text[i])}</span>`;
-    }
-  }
-  
-  fg.innerHTML = typedHtml + (!md.done ? '<span class="typist-cursor"></span>' : '');
-  bg.innerHTML = '<span style="opacity:0">' + esc(md.text.substring(0, md.typed.length)) + '</span>' + esc(md.text.substring(md.typed.length));
-}
-function handleTypistInput(e) {
-  const md = st.modeData;
-  if(md.done) return;
-  
-  const inp = e.target;
-  const val = inp.value;
-  
-  if(!md.startTime && val.length > 0) md.startTime = Date.now();
-  
-  // Backspace support
-  if(val.length < md.typed.length) {
-    md.typed = val;
-    renderTypist();
-    return;
-  }
-  
-  const char = val.slice(-1);
-  const targetChar = md.text[md.typed.length];
-  
-  if(char !== targetChar) md.errors++;
-  md.typed = val;
-  
-  // Only allow progressing if length matches
-  if(md.typed.length >= md.text.length) {
-    md.typed = md.text; // cap it
-    md.done = true;
-    inp.blur();
-    
-    const timeMins = (Date.now() - md.startTime) / 60000;
-    const words = md.text.length / 5;
-    const wpm = Math.round(words / timeMins);
-    const acc = Math.max(0, 100 - Math.round((md.errors / md.text.length)*100));
-    
-    document.getElementById('wpmDisplay').style.display = 'block';
-    document.getElementById('wpmDisplay').textContent = `Speed: ${wpm} WPM | Accuracy: ${acc}%`;
-    showResult(acc);
-  }
-  
-  renderTypist();
+
+function handleTypistInput(e){
+ const md=st.modeData;
+ if(md.done)return;
+ const inp=e.target;
+ const val=inp.value;
+ if(!md.startTime&&val.length>0)md.startTime=Date.now();
+
+ // Handle backspace
+ if(val.length<md.typed.length){
+  md.typed=val;renderTypist();return;
+ }
+
+ const newChars=val.substring(md.typed.length);
+ for(let i=0;i<newChars.length;i++){
+  const pos=md.typed.length+i;
+  if(pos<md.text.length&&newChars[i]!==md.text[pos])md.errors++;
+ }
+ md.typed=val;
+
+ if(md.typed.length>=md.text.length){
+  md.typed=md.text;md.done=true;inp.blur();
+  const timeMins=(Date.now()-md.startTime)/60000;
+  const words=md.text.split(' ').length;
+  const wpm=Math.round(words/timeMins);
+  const acc=Math.max(0,100-Math.round((md.errors/md.text.length)*100));
+  document.getElementById('wpmDisplay').style.display='block';
+  document.getElementById('wpmDisplay').textContent=`Speed: ${wpm} WPM | Accuracy: ${acc}%`;
+  showResult(acc);
+ }
+ renderTypist();
 }
 
 // ==========================================
-// MODE 6: MULTI-CHOICE TRAP
+// MODE 6: MULTI-CHOICE
 // ==========================================
-function initChoice(c) {
-  const words = buildWords(activeText());
-  const pct = parseInt(document.getElementById('diffSlider').value);
-  const rem = words.filter(w=>w.clean.length>0);
-  const cnt = Math.max(1, Math.round(rem.length*(pct/100)));
-  
-  const blanks = shuffle(rem).slice(0,cnt).map(w=>w.index).sort((a,b)=>a-b);
-  const choices = {};
-  
-  blanks.forEach(i => {
-    const ans = words[i].clean;
-    let traps = TRAP_DICT[ans.toLowerCase()];
-    if(!traps) {
-      // Generate generic traps if not in dict
-      traps = [ans+'s', ans.slice(0,-1), shuffle(ans.split('')).join('')];
-    }
-    let opts = [ans, traps[0], traps[1]||'Word'].filter(Boolean);
-    choices[i] = shuffle(opts);
-  });
-  
-  st.modeData = { words, blanks, choices, answers:{} };
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Tap the blanks and select the correct word.
-    </div>
-    <div id="mcDisplay" class="verse-display"></div>
-    <div id="mcPopup" style="display:none;" class="card">
-      <h3 style="text-align:center;margin-bottom:10px">Select Word</h3>
-      <div id="mcOptions" class="mc-options"></div>
-    </div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-pri btn-sm" onclick="checkChoice()">✅ Check</button>
-  `;
-  renderChoice();
-}
-function renderChoice() {
-  document.getElementById('mcDisplay').innerHTML = st.modeData.words.map((w,i)=>{
-    if(st.modeData.blanks.includes(i)){
-      const ans = st.modeData.answers[i];
-      if(ans) return `${w.prefix}<span class="mc-blank filled" onclick="openMcPopup(${i})">${esc(ans)}</span>${w.suffix}`;
-      return `${w.prefix}<span class="mc-blank" onclick="openMcPopup(${i})">???</span>${w.suffix}`;
-    }
-    return`<span class="verse-word">${esc(w.raw)}</span>`;
-  }).join(' ');
-}
-function openMcPopup(idx) {
-  const p = document.getElementById('mcPopup');
-  const o = document.getElementById('mcOptions');
-  o.innerHTML = st.modeData.choices[idx].map(c=>
-    `<div class="mc-option" onclick="selectMcOption(${idx}, '${esc(c.replace(/'/g,"\\'"))}')">${esc(c)}</div>`
-  ).join('');
-  p.style.display='block';
-  p.scrollIntoView({behavior:'smooth', block:'center'});
-}
-function selectMcOption(idx, val) {
-  st.modeData.answers[idx] = val;
-  document.getElementById('mcPopup').style.display='none';
-  renderChoice();
-}
-function checkChoice() {
-  let ok = 0;
-  const blanks = st.modeData.blanks;
-  if(Object.keys(st.modeData.answers).length < blanks.length) {
-    toast('Fill all blanks first!', 'warn'); return;
+function initChoice(c){
+ const words=buildWords(activeText());
+ const pct=parseInt(document.getElementById('diffSlider').value);
+ const rem=words.filter(w=>w.clean.length>0);
+ const cnt=Math.max(1,Math.round(rem.length*(pct/100)));
+ const blanks=shuffle(rem).slice(0,cnt).map(w=>w.index).sort((a,b)=>a-b);
+ const choices={};
+
+ blanks.forEach(i=>{
+  const ans=words[i].clean;
+  let traps=TRAP_DICT[ans.toLowerCase()];
+  if(!traps){
+   // Generate better generic traps
+   const otherWords=words.filter(w=>w.clean.length>0&&w.index!==i).map(w=>w.clean);
+   traps=shuffle(otherWords).slice(0,2);
+   if(traps.length<2) traps.push(ans+'s',ans.slice(0,-1)||ans+'ed');
   }
-  
-  // Highlight UI
-  const html = st.modeData.words.map((w,i)=>{
-    if(blanks.includes(i)){
-      const usr = st.modeData.answers[i];
-      if(usr === w.clean) { ok++; return `${w.prefix}<span class="mc-blank filled" style="pointer-events:none">${esc(usr)}</span>${w.suffix}`; }
-      else { return `${w.prefix}<span class="mc-blank wrong" style="pointer-events:none">${esc(usr)}</span> <span style="font-size:0.7em;color:var(--success)">(${esc(w.clean)})</span>${w.suffix}`; }
-    }
-    return`<span class="verse-word">${esc(w.raw)}</span>`;
-  }).join(' ');
-  
-  document.getElementById('mcDisplay').innerHTML = html;
-  showResult(Math.round(ok / blanks.length * 100));
+  let opts=[ans,traps[0],traps[1]||'Word'].filter(Boolean);
+  // Ensure unique options
+  opts=[...new Set(opts)];
+  if(opts.length<3)opts.push('other');
+  choices[i]=shuffle(opts.slice(0,3));
+ });
+
+ st.modeData={words,blanks,choices,answers:{}};
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Tap the blanks and select the correct word.
+  </div>
+  <div id="mcDisplay" class="verse-display"></div>
+  <div id="mcPopup" style="display:none;" class="card">
+   <h3 style="text-align:center;margin-bottom:10px">Select Word</h3>
+   <div id="mcOptions" class="mc-options"></div>
+  </div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-pri btn-sm" onclick="checkChoice()">✅ Check</button>
+ `;
+ renderChoice();
+}
+
+function renderChoice(){
+ document.getElementById('mcDisplay').innerHTML=st.modeData.words.map((w,i)=>{
+  if(st.modeData.blanks.includes(i)){
+   const ans=st.modeData.answers[i];
+   if(ans)return`${w.prefix}<span class="mc-blank filled" onclick="openMcPopup(${i})">${esc(ans)}</span>${w.suffix}`;
+   return`${w.prefix}<span class="mc-blank" onclick="openMcPopup(${i})">???</span>${w.suffix}`;
+  }
+  return`<span class="verse-word">${esc(w.raw)}</span>`;
+ }).join(' ');
+}
+
+function openMcPopup(idx){
+ const p=document.getElementById('mcPopup');
+ const o=document.getElementById('mcOptions');
+ o.innerHTML=st.modeData.choices[idx].map(c=>{
+  const escaped=esc(c).replace(/'/g,"&#39;");
+  return`<div class="mc-option" onclick="selectMcOption(${idx},'${escaped}')">${esc(c)}</div>`;
+ }).join('');
+ p.style.display='block';
+ p.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function selectMcOption(idx,val){
+ // Decode HTML entities back
+ const temp=document.createElement('div');temp.innerHTML=val;
+ st.modeData.answers[idx]=temp.textContent;
+ document.getElementById('mcPopup').style.display='none';
+ renderChoice();
+}
+
+function checkChoice(){
+ let ok=0;
+ const blanks=st.modeData.blanks;
+ if(Object.keys(st.modeData.answers).length<blanks.length){
+  toast('Fill all blanks first!','warn');return;
+ }
+ const html=st.modeData.words.map((w,i)=>{
+  if(blanks.includes(i)){
+   const usr=st.modeData.answers[i];
+   if(usr===w.clean){ok++;return`${w.prefix}<span class="mc-blank filled" style="pointer-events:none">${esc(usr)}</span>${w.suffix}`;}
+   else{return`${w.prefix}<span class="mc-blank wrong" style="pointer-events:none">${esc(usr)}</span> <span style="font-size:0.7em;color:var(--success)">(${esc(w.clean)})</span>${w.suffix}`;}
+  }
+  return`<span class="verse-word">${esc(w.raw)}</span>`;
+ }).join(' ');
+ document.getElementById('mcDisplay').innerHTML=html;
+ document.getElementById('mcPopup').style.display='none';
+ showResult(Math.round(ok/blanks.length*100));
 }
 
 // ==========================================
 // MODE 7: RECITE & CHECK
 // ==========================================
-function initRecite(c) {
-  const SpeechR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechR) {
-    c.innerHTML = '<div class="empty-msg"><span class="em-icon">🎤❌</span><p>Speech recognition not supported in this browser.</p></div>';
-    return;
-  }
-  
-  st.modeData = { transcript: '', isRecording: false, rec: new SpeechR() };
-  const rec = st.modeData.rec;
-  rec.continuous = true;
-  rec.interimResults = true;
-  
-  rec.onresult = (e) => {
-    let finalTr = '';
-    for(let i=0; i<e.results.length; i++) finalTr += e.results[i][0].transcript;
-    st.modeData.transcript = finalTr;
-    document.getElementById('reciteTranscript').textContent = finalTr;
-  };
-  rec.onend = () => { if(st.modeData.isRecording) rec.start(); }; // Keep alive until toggled off
-  
-  c.innerHTML = `
-    <div style="text-align:center; margin-bottom:10px; color:var(--txt3); font-size:0.85rem;">
-      Tap the mic, recite the verse aloud, and tap again to check.
-    </div>
-    <button class="mic-btn" id="micBtn" onclick="toggleRecite()">🎤</button>
-    <div id="reciteTranscript" class="recite-transcript">...waiting for speech...</div>
-  `;
-  document.getElementById('gameControls').innerHTML = `
-    <button class="btn btn-pri btn-sm" onclick="checkRecite()">✅ Check Accuracy</button>
-  `;
+function initRecite(c){
+ const SpeechR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SpeechR){
+  c.innerHTML='<div class="empty-msg"><span class="em-icon">🎙️</span><p>Speech recognition not supported in this browser. Try Chrome.</p></div>';
+  document.getElementById('gameControls').innerHTML='';
+  return;
+ }
+ st.modeData={transcript:'',isRecording:false,rec:new SpeechR()};
+ const rec=st.modeData.rec;
+ rec.continuous=true;
+ rec.interimResults=true;
+ rec.onresult=(e)=>{
+  let finalTr='';
+  for(let i=0;i<e.results.length;i++)finalTr+=e.results[i][0].transcript;
+  st.modeData.transcript=finalTr;
+  const el=document.getElementById('reciteTranscript');
+  if(el)el.textContent=finalTr;
+ };
+ rec.onerror=(e)=>{console.log('Speech error:',e.error);};
+ rec.onend=()=>{if(st.modeData.isRecording)try{rec.start();}catch(e){}};
+ c.innerHTML=`
+  <div style="text-align:center;margin-bottom:10px;color:var(--txt3);font-size:0.85rem;">
+   Tap the mic, recite the verse aloud, and tap again to stop.
+  </div>
+  <button class="mic-btn" id="micBtn" onclick="toggleRecite()">🎙️</button>
+  <div id="reciteTranscript" class="recite-transcript">...waiting for speech...</div>
+ `;
+ document.getElementById('gameControls').innerHTML=`
+  <button class="btn btn-pri btn-sm" onclick="checkRecite()">📊 Check Accuracy</button>
+ `;
 }
-function toggleRecite() {
-  const md = st.modeData;
-  const btn = document.getElementById('micBtn');
-  if(md.isRecording) {
-    md.isRecording = false;
-    md.rec.stop();
-    btn.classList.remove('recording');
-  } else {
-    md.isRecording = true;
-    md.rec.start();
-    btn.classList.add('recording');
-    document.getElementById('reciteTranscript').textContent = 'Listening...';
-  }
+
+function toggleRecite(){
+ const md=st.modeData;
+ const btn=document.getElementById('micBtn');
+ if(md.isRecording){
+  md.isRecording=false;md.rec.stop();btn.classList.remove('recording');
+ }else{
+  md.isRecording=true;
+  try{md.rec.start();}catch(e){toast('Mic error: '+e.message,'error');return;}
+  btn.classList.add('recording');
+  document.getElementById('reciteTranscript').textContent='Listening...';
+ }
 }
-function checkRecite() {
-  const md = st.modeData;
-  if(md.isRecording) toggleRecite(); // stop if running
-  
-  if(!md.transcript.trim()) { toast('No speech detected.', 'warn'); return; }
-  
-  const targetWords = activeText().toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/).filter(Boolean);
-  const spokenWords = md.transcript.toLowerCase().replace(/[^a-z ]/g,'').split(/\s+/).filter(Boolean);
-  
-  let ok = 0;
-  let targetIdx = 0;
-  
-  // Basic greedy match
-  spokenWords.forEach(sw => {
-    if(targetIdx < targetWords.length && targetWords[targetIdx] === sw) {
-      ok++; targetIdx++;
-    } else if (targetIdx+1 < targetWords.length && targetWords[targetIdx+1] === sw) {
-      // Allow skipping one word
-      ok++; targetIdx += 2;
-    }
-  });
-  
-  const pct = Math.round(ok / targetWords.length * 100);
-  document.getElementById('reciteTranscript').innerHTML = `
-    <strong>Target:</strong> ${esc(activeText())}<br><br>
-    <strong>You said:</strong> ${esc(md.transcript)}
-  `;
-  showResult(pct > 100 ? 100 : pct); // cap at 100
+
+function checkRecite(){
+ const md=st.modeData;
+ if(md.isRecording)toggleRecite();
+ if(!md.transcript.trim()){toast('No speech detected.','warn');return;}
+ const targetWords=activeText().toLowerCase().replace(/[^a-z ]/g,'').split(/ +/).filter(Boolean);
+ const spokenWords=md.transcript.toLowerCase().replace(/[^a-z ]/g,'').split(/ +/).filter(Boolean);
+ let ok=0;let targetIdx=0;
+ spokenWords.forEach(sw=>{
+  if(targetIdx<targetWords.length&&targetWords[targetIdx]===sw){ok++;targetIdx++;}
+  else if(targetIdx+1<targetWords.length&&targetWords[targetIdx+1]===sw){ok++;targetIdx+=2;}
+ });
+ const pct=Math.min(100,Math.round(ok/targetWords.length*100));
+ document.getElementById('reciteTranscript').innerHTML=`
+  <strong>Target:</strong> ${esc(activeText())}<br><br>
+  <strong>You said:</strong> ${esc(md.transcript)}
+ `;
+ showResult(pct);
 }
 
 // ======= LIBRARY =======
 function renderLibrary(){
-  const list=document.getElementById('libraryList');
-  const emp=document.getElementById('libraryEmpty');
-  if(!st.verses.length){list.innerHTML='';emp.style.display='block';return}
-  emp.style.display='none';
-
-  list.innerHTML=st.verses.map(v=>{
-    const p=v.overallPct || 0;
-    const cv=p>=90?'var(--gold-m)':p>=61?'var(--green)':p>=26?'var(--yellow)':'var(--red)';
-    return`<div class="saved-item" style="border-left-color:${cv}" onclick="loadLib('${esc(v.uid).replace(/'/g,"\\'")}')">
-      <div class="si-info">
-        <div class="si-ref">📖 ${esc(v.ref)} <span class="ver-badge">${esc(v.version||'KJV')}</span></div>
-        <div class="si-meta">${v.practiceCount||0}× practiced</div>
-      </div>
-      <div class="si-pct" style="color:${cv}">${p}%</div>
-    </div>`;
-  }).join('');
+ const list=document.getElementById('libraryList');
+ const emp=document.getElementById('libraryEmpty');
+ if(!st.verses.length){list.innerHTML='';emp.style.display='block';return}
+ emp.style.display='none';
+ list.innerHTML=st.verses.map(v=>{
+  const p=v.overallPct||0;
+  const ml=v.masteryLevel||0;
+  const cv=p>=90?'var(--gold-m)':p>=61?'var(--green)':p>=26?'var(--yellow)':'var(--red)';
+  const info=getMasteryLabel(ml);
+  return`<div class="saved-item" style="border-left-color:${cv}">
+   <div class="si-info" onclick="loadLib('${esc(v.uid).replace(/'/g,"\\'")}')">
+    <div class="si-ref">📖 ${esc(v.ref)} <span class="ver-badge">${esc(v.version||'KJV')}</span></div>
+    <div class="si-meta">${v.practiceCount||0}× practiced</div>
+    <div class="si-mastery"><span class="mastery-badge ${info.cls}">${info.icon} ${info.name} (Lv ${ml}/10)</span></div>
+   </div>
+   <div style="display:flex;align-items:center;gap:8px">
+    <div class="si-pct" style="color:${cv}">${p}%</div>
+    <button class="si-del" onclick="event.stopPropagation();deleteVerse('${esc(v.uid).replace(/'/g,"\\'")}')" title="Delete">🗑️</button>
+   </div>
+  </div>`;
+ }).join('');
 }
+
 function loadLib(uid){
-  const v=st.verses.find(x=>x.uid===uid);if(!v)return;
-  loadVerse(v.ref,v.fullText,v.version);
-  toast('Loaded: '+v.ref,'info');
+ const v=st.verses.find(x=>x.uid===uid);if(!v)return;
+ loadVerse(v.ref,v.fullText,v.version);
+ toast('Loaded: '+v.ref,'info');
+}
+
+function deleteVerse(uid){
+ if(!confirm('Delete this verse from your library?'))return;
+ st.verses=st.verses.filter(v=>v.uid!==uid);
+ save();
+ renderLibrary();
+ toast('Verse deleted','info');
 }
 
 // ======= ANIMATIONS =======
 function launchConfetti(){
-  const container=document.getElementById('confettiContainer');
-  const colors=['#6c5ce7','#00cec9','#fdcb6e','#ff6b6b','#55efc4','#a29bfe','#fd79a8','#ffeaa7'];
-  for(let i=0;i<50;i++){
-    const el=document.createElement('div');
-    el.className='confetti';
-    el.style.left=Math.random()*100+'%';
-    el.style.top='-10px';
-    el.style.background=colors[Math.floor(Math.random()*colors.length)];
-    el.style.setProperty('--dur',(1.5+Math.random()*2)+'s');
-    el.style.animationDelay=(Math.random()*0.5)+'s';
-    el.style.width=(5+Math.random()*8)+'px';
-    el.style.height=(5+Math.random()*8)+'px';
-    el.style.borderRadius=Math.random()>0.5?'50%':'2px';
-    container.appendChild(el);
-    setTimeout(()=>el.remove(),4000);
-  }
+ const container=document.getElementById('confettiContainer');
+ const colors=['#6c5ce7','#00cec9','#fdcb6e','#ff6b6b','#55efc4','#a29bfe','#fd79a8','#ffeaa7'];
+ for(let i=0;i<50;i++){
+  const el=document.createElement('div');
+  el.className='confetti';
+  el.style.left=Math.random()*100+'%';
+  el.style.top='-10px';
+  el.style.background=colors[Math.floor(Math.random()*colors.length)];
+  el.style.setProperty('--dur',(1.5+Math.random()*2)+'s');
+  el.style.animationDelay=(Math.random()*0.5)+'s';
+  el.style.width=(5+Math.random()*8)+'px';
+  el.style.height=(5+Math.random()*8)+'px';
+  el.style.borderRadius=Math.random()>0.5?'50%':'2px';
+  container.appendChild(el);
+  setTimeout(()=>el.remove(),4000);
+ }
 }
 
 // ======= INIT =======
